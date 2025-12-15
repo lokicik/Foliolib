@@ -1,0 +1,27 @@
+# Build outputs
+/build
+/bin
+*.apk
+*.ap_
+*.aab
+*.aar
+
+# Generated code
+/src/main/gen
+/src/test/gen
+/src/androidTest/gen
+
+# Generated resources
+R.java
+BuildConfig.java
+
+# Lint
+lint-results.xml
+lint-results*.html
+
+# Gradle
+.gradle
+
+# Test outputs
+/reports
+coverage.xml

@@ -1,0 +1,84 @@
+# IntelliJ IDEA
+*.iml
+.idea/
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/encodings.xml
+.idea/inspectionProfiles
+
+# Gradle
+.gradle/
+.gradle
+build/
+gradle-app.setting
+gradlew
+gradlew.bat
+
+# Local configuration
+local.properties
+/local.properties
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build outputs
+/build
+/captures
+/app/build
+
+# C++ / Native builds
+.externalNativeBuild
+.cxx
+CMakeLists.txt.user
+cmake_install.cmake
+
+# Logs
+*.log
+*.logs
+
+# API Keys and Secrets
+google-services.json
+firebase-debug.log
+.env
+.env.local
+*.keystore
+*.jks
+
+# IDE
+.vscode/
+.settings/
+*.launch
+.classpath
+.project
+.factorypath
+
+# Generated files
+.R
+.r
+R.java
+BuildConfig.java
+
+# Test coverage
+coverage/
+*.profraw
+*.profdata
+
+# Misc
+*.swp
+*.swo
+*~
+.history
+*.bak
+.orig
+*.class
+*.jar
