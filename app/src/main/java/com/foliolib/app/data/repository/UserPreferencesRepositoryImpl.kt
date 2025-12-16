@@ -46,6 +46,17 @@ class UserPreferencesRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateReadingReminderTime(time: String) = withContext(ioDispatcher) {
+        Timber.d("Updating reading reminder time to: $time")
+        try {
+            ensureDefaultPreferences()
+            userPreferencesDao.updateReadingReminderTime(time)
+        } catch (e: Exception) {
+            Timber.e(e, "Error updating reading reminder time")
+            throw e
+        }
+    }
+
     override suspend fun ensureDefaultPreferences() = withContext(ioDispatcher) {
         try {
             val existing = userPreferencesDao.getUserPreferencesOnce()

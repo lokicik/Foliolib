@@ -21,6 +21,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
+import android.widget.Toast
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
@@ -34,18 +36,21 @@ fun SearchScreen(
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
             scope.launch {
                 when (event) {
                     is SearchEvent.BookAdded -> {
+                        Toast.makeText(context, "${event.bookTitle} added to library", Toast.LENGTH_SHORT).show()
                         snackbarHostState.showSnackbar(
                             message = "${event.bookTitle} added to library",
                             duration = SnackbarDuration.Short
                         )
                     }
                     is SearchEvent.BookAddError -> {
+                        Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
                         snackbarHostState.showSnackbar(
                             message = event.message,
                             duration = SnackbarDuration.Short

@@ -7,5 +7,6 @@ interface UserPreferencesRepository {
     fun getUserPreferences(): Flow<UserPreferencesEntity?>
     suspend fun updateThemeMode(themeMode: String)
     suspend fun updateReadingReminderEnabled(enabled: Boolean)
+    suspend fun updateReadingReminderTime(time: String)
     suspend fun ensureDefaultPreferences()
 }
