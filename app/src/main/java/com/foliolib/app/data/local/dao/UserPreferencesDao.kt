@@ -25,6 +25,9 @@ interface UserPreferencesDao {
     @Query("UPDATE user_preferences SET reading_reminder_enabled = :enabled WHERE id = 1")
     suspend fun updateReadingReminderEnabled(enabled: Boolean)
 
+    @Query("UPDATE user_preferences SET reading_reminder_time = :time WHERE id = 1")
+    suspend fun updateReadingReminderTime(time: String)
+
     @Query("UPDATE user_preferences SET current_streak = :streak WHERE id = 1")
     suspend fun updateCurrentStreak(streak: Int)
 

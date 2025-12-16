@@ -1,0 +1,108 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">Foliolib</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_library">Biblioteca</string>
+    <string name="nav_search">Buscar</string>
+    <string name="nav_statistics">Estadísticas</string>
+    <string name="nav_profile">Perfil</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_appearance">Apariencia</string>
+    <string name="settings_dark_theme">Tema Oscuro</string>
+    <string name="settings_theme_enabled">Activado</string>
+    <string name="settings_theme_disabled">Desactivado</string>
+    <string name="settings_notifications">Notificaciones</string>
+    <string name="settings_reading_reminders">Recordatorios de Lectura</string>
+    <string name="settings_data">Datos</string>
+    <string name="settings_export">Exportar Biblioteca</string>
+    <string name="settings_about">Acerca de</string>
+
+    <!-- Search -->
+    <string name="search_title">Buscar</string>
+    <string name="search_placeholder">Buscar libros…</string>
+    <string name="search_no_results">No se encontraron libros</string>
+    <string name="search_error">Error en la búsqueda. Inténtalo de nuevo.</string>
+    <string name="search_manual_entry">¿No encuentras tu libro? Añádelo manualmente</string>
+    <string name="search_book_added">%s añadido a la biblioteca</string>
+    <string name="search_book_add_error">Error al añadir el libro</string>
+    <string name="search_clear">Borrar</string>
+    <string name="search_books">Buscar libros</string>
+    <string name="search_hint">Introduce un título, autor o ISBN</string>
+
+    <!-- Library -->
+    <string name="library_title">Biblioteca</string>
+    <string name="library_empty">Tu biblioteca está vacía</string>
+    <string name="library_empty_hint">Busca libros o añádelos manualmente</string>
+    <string name="library_sort_title">Ordenar por Título</string>
+    <string name="library_sort_author">Ordenar por Autor</string>
+    <string name="library_sort_date">Ordenar por Fecha</string>
+    <string name="library_sort_rating">Ordenar por Valoración</string>
+    <string name="library_view_grid">Vista Cuadrícula</string>
+    <string name="library_view_list">Vista Lista</string>
+
+    <!-- Book Detail -->
+    <string name="book_detail_reading_status">Estado de Lectura</string>
+    <string name="book_detail_progress">Progreso</string>
+    <string name="book_detail_pages">%d de %d páginas</string>
+    <string name="book_detail_rating">Valoración</string>
+    <string name="book_detail_notes">Notas</string>
+    <string name="book_detail_add_note">Añadir Nota</string>
+    <string name="book_detail_start_reading">Empezar a Leer</string>
+    <string name="book_detail_delete">Eliminar Libro</string>
+    <string name="book_detail_delete_confirm">¿Eliminar este libro de tu biblioteca?</string>
+
+    <!-- Reading Status -->
+    <string name="status_reading">Leyendo</string>
+    <string name="status_want_to_read">Quiero Leer</string>
+    <string name="status_finished">Terminado</string>
+    <string name="status_dnf">No Terminado</string>
+
+    <!-- Notes -->
+    <string name="notes_title">Notas</string>
+    <string name="notes_empty">No hay notas aún</string>
+    <string name="notes_empty_hint">Toca + para añadir tu primera nota</string>
+    <string name="notes_add">Añadir Nota</string>
+    <string name="notes_page">Página %d</string>
+    <string name="notes_chapter">Capítulo %s</string>
+    <string name="notes_delete">Eliminar Nota</string>
+    <string name="notes_delete_confirm">¿Eliminar esta nota?</string>
+
+    <!-- Shelves -->
+    <string name="shelves_title">Estanterías</string>
+    <string name="shelves_default">Estanterías Predeterminadas</string>
+    <string name="shelves_custom">Mis Estanterías</string>
+    <string name="shelves_create">Crear Estantería</string>
+    <string name="shelves_delete">Eliminar Estantería</string>
+    <string name="shelves_delete_confirm">¿Eliminar esta estantería? Los libros no se eliminarán.</string>
+    <string name="shelves_book_count">%d libros</string>
+
+    <!-- Statistics -->
+    <string name="stats_title">Estadísticas</string>
+    <string name="stats_books_read">Libros Leídos</string>
+    <string name="stats_pages_read">Páginas Leídas</string>
+    <string name="stats_reading_time">Tiempo de Lectura</string>
+    <string name="stats_current_streak">Racha Actual</string>
+    <string name="stats_days">%d días</string>
+    <string name="stats_genres">Distribución de Géneros</string>
+    <string name="stats_favorite_authors">Autores Favoritos</string>
+
+    <!-- Home -->
+    <string name="home_title">Inicio</string>
+    <string name="home_reading_streak">Racha de Lectura</string>
+    <string name="home_currently_reading">Leyendo Actualmente</string>
+    <string name="home_no_books">No hay libros en progreso</string>
+    <string name="home_start_reading">¡Empieza tu viaje de lectura!</string>
+
+    <!-- Common -->
+    <string name="common_save">Guardar</string>
+    <string name="common_cancel">Cancelar</string>
+    <string name="common_ok">OK</string>
+    <string name="common_delete">Eliminar</string>
+    <string name="common_edit">Editar</string>
+    <string name="common_error">Error</string>
+    <string name="common_loading">Cargando…</string>
+</resources>

@@ -1,0 +1,108 @@
+<resources>
+    <!-- App -->
+    <string name="app_name">Foliolib</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Ana Sayfa</string>
+    <string name="nav_library">Kütüphane</string>
+    <string name="nav_search">Ara</string>
+    <string name="nav_statistics">İstatistikler</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_appearance">Görünüm</string>
+    <string name="settings_dark_theme">Karanlık Tema</string>
+    <string name="settings_theme_enabled">Etkin</string>
+    <string name="settings_theme_disabled">Devre Dışı</string>
+    <string name="settings_notifications">Bildirimler</string>
+    <string name="settings_reading_reminders">Okuma Hatırlatıcıları</string>
+    <string name="settings_data">Veri</string>
+    <string name="settings_export">Kütüphaneyi Dışa Aktar</string>
+    <string name="settings_about">Hakkında</string>
+
+    <!-- Search -->
+    <string name="search_title">Ara</string>
+    <string name="search_placeholder">Kitap ara…</string>
+    <string name="search_no_results">Kitap bulunamadı</string>
+    <string name="search_error">Arama başarısız. Lütfen tekrar deneyin.</string>
+    <string name="search_manual_entry">Kitabınızı bulamıyor musunuz? Manuel olarak ekleyin</string>
+    <string name="search_book_added">%s kütüphaneye eklendi</string>
+    <string name="search_book_add_error">Kitap eklenemedi</string>
+    <string name="search_clear">Temizle</string>
+    <string name="search_books">Kitap ara</string>
+    <string name="search_hint">Başlık, yazar veya ISBN girin</string>
+
+    <!-- Library -->
+    <string name="library_title">Kütüphane</string>
+    <string name="library_empty">Kütüphaneniz boş</string>
+    <string name="library_empty_hint">Kitap arayın veya manuel olarak ekleyin</string>
+    <string name="library_sort_title">Başlığa Göre Sırala</string>
+    <string name="library_sort_author">Yazara Göre Sırala</string>
+    <string name="library_sort_date">Tarihe Göre Sırala</string>
+    <string name="library_sort_rating">Puana Göre Sırala</string>
+    <string name="library_view_grid">Izgara Görünümü</string>
+    <string name="library_view_list">Liste Görünümü</string>
+
+    <!-- Book Detail -->
+    <string name="book_detail_reading_status">Okuma Durumu</string>
+    <string name="book_detail_progress">İlerleme</string>
+    <string name="book_detail_pages">%d / %d sayfa</string>
+    <string name="book_detail_rating">Puan</string>
+    <string name="book_detail_notes">Notlar</string>
+    <string name="book_detail_add_note">Not Ekle</string>
+    <string name="book_detail_start_reading">Okumaya Başla</string>
+    <string name="book_detail_delete">Kitabı Sil</string>
+    <string name="book_detail_delete_confirm">Bu kitap kütüphanenizden silinsin mi?</string>
+
+    <!-- Reading Status -->
+    <string name="status_reading">Okunuyor</string>
+    <string name="status_want_to_read">Okunacak</string>
+    <string name="status_finished">Bitti</string>
+    <string name="status_dnf">Yarım Bırakıldı</string>
+
+    <!-- Notes -->
+    <string name="notes_title">Notlar</string>
+    <string name="notes_empty">Henüz not yok</string>
+    <string name="notes_empty_hint">İlk notunuzu eklemek için +\'ya dokunun</string>
+    <string name="notes_add">Not Ekle</string>
+    <string name="notes_page">Sayfa %d</string>
+    <string name="notes_chapter">Bölüm %s</string>
+    <string name="notes_delete">Notu Sil</string>
+    <string name="notes_delete_confirm">Bu not silinsin mi?</string>
+
+    <!-- Shelves -->
+    <string name="shelves_title">Raflar</string>
+    <string name="shelves_default">Varsayılan Raflar</string>
+    <string name="shelves_custom">Raflarım</string>
+    <string name="shelves_create">Raf Oluştur</string>
+    <string name="shelves_delete">Rafı Sil</string>
+    <string name="shelves_delete_confirm">Bu raf silinsin mi? Kitaplar silinmeyecek.</string>
+    <string name="shelves_book_count">%d kitap</string>
+
+    <!-- Statistics -->
+    <string name="stats_title">İstatistikler</string>
+    <string name="stats_books_read">Okunan Kitaplar</string>
+    <string name="stats_pages_read">Okunan Sayfalar</string>
+    <string name="stats_reading_time">Okuma Süresi</string>
+    <string name="stats_current_streak">Mevcut Seri</string>
+    <string name="stats_days">%d gün</string>
+    <string name="stats_genres">Tür Dağılımı</string>
+    <string name="stats_favorite_authors">Favori Yazarlar</string>
+
+    <!-- Home -->
+    <string name="home_title">Ana Sayfa</string>
+    <string name="home_reading_streak">Okuma Serisi</string>
+    <string name="home_currently_reading">Şu Anda Okunan</string>
+    <string name="home_no_books">Devam eden kitap yok</string>
+    <string name="home_start_reading">Okuma yolculuğunuza başlayın!</string>
+
+    <!-- Common -->
+    <string name="common_save">Kaydet</string>
+    <string name="common_cancel">İptal</string>
+    <string name="common_ok">Tamam</string>
+    <string name="common_delete">Sil</string>
+    <string name="common_edit">Düzenle</string>
+    <string name="common_error">Hata</string>
+    <string name="common_loading">Yükleniyor…</string>
+</resources>

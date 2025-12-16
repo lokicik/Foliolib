@@ -1,6 +1,7 @@
 package com.foliolib.app.core.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import com.foliolib.app.domain.repository.UserPreferencesRepository
 import dagger.Module
 import dagger.Provides
@@ -27,6 +28,12 @@ annotation class DefaultDispatcher
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideWorkManager(@ApplicationContext context: Context): WorkManager {
+        return WorkManager.getInstance(context)
+    }
 
     @Provides
     @Singleton

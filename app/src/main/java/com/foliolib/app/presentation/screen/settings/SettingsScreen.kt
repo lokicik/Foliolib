@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Gavel
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Palette
+import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.filled.Upload
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -79,6 +80,15 @@ fun SettingsScreen(
                         )
                     }
                 )
+
+                if (uiState.notificationsEnabled) {
+                    SettingsItem(
+                        icon = Icons.Default.Schedule,
+                        title = "Reminder Time",
+                        subtitle = String.format("%02d:%02d", uiState.reminderHour, uiState.reminderMinute),
+                        onClick = { viewModel.showTimePicker() }
+                    )
+                }
             }
 
             Divider()
@@ -130,6 +140,35 @@ fun SettingsScreen(
             AboutDialog(
                 version = uiState.appVersion,
                 onDismiss = { viewModel.hideAboutDialog() }
+            )
+        }
+
+        // Time Picker Dialog
+        if (uiState.showTimePicker) {
+            val timePickerState = rememberTimePickerState(
+                initialHour = uiState.reminderHour,
+                initialMinute = uiState.reminderMinute
+            )
+
+            AlertDialog(
+                onDismissRequest = { viewModel.hideTimePicker() },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.updateReminderTime(timePickerState.hour, timePickerState.minute)
+                        }
+                    ) {
+                        Text("OK")
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { viewModel.hideTimePicker() }) {
+                        Text("Cancel")
+                    }
+                },
+                text = {
+                    TimePicker(state = timePickerState)
+                }
             )
         }
 
