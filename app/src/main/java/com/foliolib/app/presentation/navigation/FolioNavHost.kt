@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -14,6 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.foliolib.app.presentation.screen.addbook.ManualEntryScreen
+import com.foliolib.app.presentation.screen.editbook.EditBookScreen
 import com.foliolib.app.presentation.screen.bookdetail.BookDetailScreen
 import com.foliolib.app.presentation.screen.home.HomeScreen
 import com.foliolib.app.presentation.screen.library.LibraryScreen
@@ -57,10 +59,16 @@ fun FolioApp() {
                             icon = {
                                 Icon(
                                     imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-                                    contentDescription = item.label
+                                    contentDescription = stringResource(item.labelResId)
                                 )
                             },
-                            label = { Text(item.label) }
+                            label = { 
+                                Text(
+                                    text = stringResource(item.labelResId),
+                                    maxLines = 1,
+                                    overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                                ) 
+                            }
                         )
                     }
                 }
@@ -129,6 +137,9 @@ fun FolioNavHost(
                 },
                 onViewNotes = { bookId ->
                     navController.navigate(Screen.NotesScreen.createRoute(bookId))
+                },
+                onEditBook = { bookId ->
+                    navController.navigate(Screen.EditBook.createRoute(bookId))
                 }
             )
         }
@@ -146,6 +157,15 @@ fun FolioNavHost(
                         restoreState = true
                     }
                 }
+            )
+        }
+
+        composable(
+            route = Screen.EditBook.route,
+            arguments = listOf(navArgument("bookId") { type = NavType.StringType })
+        ) {
+            EditBookScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
 

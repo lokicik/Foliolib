@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.foliolib.app.R
+import androidx.compose.ui.res.stringResource
 import com.foliolib.app.domain.model.Book
 import com.foliolib.app.domain.model.ReadingStatus
 import com.foliolib.app.presentation.components.book.BookCover
@@ -23,6 +25,7 @@ fun BookDetailScreen(
     onNavigateBack: () -> Unit,
     onStartReading: (String) -> Unit = {},
     onViewNotes: (String) -> Unit = {},
+    onEditBook: (String) -> Unit = {},
     viewModel: BookDetailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -30,26 +33,32 @@ fun BookDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Book Details") },
+                title = { Text(stringResource(R.string.book_detail_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 },
                 actions = {
+                    IconButton(onClick = { uiState.book?.let { onEditBook(it.id) } }) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = stringResource(R.string.edit_book_title)
+                        )
+                    }
                     IconButton(onClick = { uiState.book?.let { onViewNotes(it.id) } }) {
                         Icon(
                             imageVector = Icons.Default.Note,
-                            contentDescription = "View notes"
+                            contentDescription = stringResource(R.string.book_detail_notes)
                         )
                     }
                     IconButton(onClick = { viewModel.showDeleteDialog() }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete book"
+                            contentDescription = stringResource(R.string.book_detail_delete)
                         )
                     }
                 }
@@ -91,20 +100,20 @@ fun BookDetailScreen(
         if (uiState.showDeleteDialog) {
             AlertDialog(
                 onDismissRequest = { viewModel.hideDeleteDialog() },
-                title = { Text("Delete Book?") },
-                text = { Text("This will permanently remove this book from your library.") },
+                title = { Text(stringResource(R.string.book_detail_delete_title)) },
+                text = { Text(stringResource(R.string.book_detail_delete_confirm)) },
                 confirmButton = {
                     TextButton(
                         onClick = {
                             viewModel.deleteBook(onDeleted = onNavigateBack)
                         }
                     ) {
-                        Text("Delete")
+                        Text(stringResource(R.string.common_delete))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.hideDeleteDialog() }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.common_cancel))
                     }
                 }
             )
@@ -163,7 +172,7 @@ private fun BookDetailContent(
 
                 book.pageCount?.let {
                     Text(
-                        text = "$it pages",
+                        text = stringResource(R.string.book_detail_page_count, it),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -192,7 +201,7 @@ private fun BookDetailContent(
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Start Reading Session")
+                Text(stringResource(R.string.book_detail_start_session))
             }
         }
 
@@ -219,7 +228,7 @@ private fun BookDetailContent(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "Description",
+                        text = stringResource(R.string.manual_entry_description),
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(
@@ -250,7 +259,7 @@ private fun ReadingStatusSelector(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = "Reading Status",
+                text = stringResource(R.string.book_detail_reading_status),
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -260,11 +269,11 @@ private fun ReadingStatusSelector(
             ) {
                 OutlinedTextField(
                     value = when (currentStatus) {
-                        ReadingStatus.WANT_TO_READ -> "Want to Read"
-                        ReadingStatus.READING -> "Currently Reading"
-                        ReadingStatus.FINISHED -> "Finished"
-                        ReadingStatus.DNF -> "Did Not Finish"
-                        else -> "Not Started"
+                        ReadingStatus.WANT_TO_READ -> stringResource(R.string.status_want_to_read)
+                        ReadingStatus.READING -> stringResource(R.string.status_reading)
+                        ReadingStatus.FINISHED -> stringResource(R.string.status_finished)
+                        ReadingStatus.DNF -> stringResource(R.string.status_dnf)
+                        else -> stringResource(R.string.status_not_started)
                     },
                     onValueChange = {},
                     readOnly = true,
@@ -281,10 +290,10 @@ private fun ReadingStatusSelector(
                     onDismissRequest = { expanded = false }
                 ) {
                     listOf(
-                        ReadingStatus.WANT_TO_READ to "Want to Read",
-                        ReadingStatus.READING to "Currently Reading",
-                        ReadingStatus.FINISHED to "Finished",
-                        ReadingStatus.DNF to "Did Not Finish"
+                        ReadingStatus.WANT_TO_READ to stringResource(R.string.status_want_to_read),
+                        ReadingStatus.READING to stringResource(R.string.status_reading),
+                        ReadingStatus.FINISHED to stringResource(R.string.status_finished),
+                        ReadingStatus.DNF to stringResource(R.string.status_dnf)
                     ).forEach { (status, label) ->
                         DropdownMenuItem(
                             text = { Text(label) },
@@ -316,7 +325,7 @@ private fun ProgressSection(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Reading Progress",
+                text = stringResource(R.string.book_detail_progress_title),
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -327,7 +336,7 @@ private fun ProgressSection(
                     modifier = Modifier.fillMaxWidth()
                 )
                 Text(
-                    text = "${(currentPage.toFloat() / totalPages * 100).toInt()}% complete",
+                    text = stringResource(R.string.book_detail_percent_complete, (currentPage.toFloat() / totalPages * 100).toInt()),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -341,7 +350,7 @@ private fun ProgressSection(
                 OutlinedTextField(
                     value = pageInput,
                     onValueChange = { pageInput = it },
-                    label = { Text("Current Page") },
+                    label = { Text(stringResource(R.string.book_detail_current_page)) },
                     modifier = Modifier.weight(1f),
                     singleLine = true
                 )
@@ -355,12 +364,12 @@ private fun ProgressSection(
                         }
                     }
                 ) {
-                    Text("Update")
+                    Text(stringResource(R.string.book_detail_update))
                 }
             }
 
             Text(
-                text = "of $totalPages pages",
+                text = stringResource(R.string.book_detail_of_pages, totalPages),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -381,7 +390,7 @@ private fun RatingSection(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = "Your Rating",
+                text = stringResource(R.string.book_detail_your_rating),
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -399,7 +408,7 @@ private fun RatingSection(
                             } else {
                                 Icons.Default.StarBorder
                             },
-                            contentDescription = "${index + 1} stars",
+                            contentDescription = stringResource(R.string.book_detail_stars, index + 1),
                             tint = if (index < (rating?.toInt() ?: 0)) {
                                 MaterialTheme.colorScheme.primary
                             } else {
@@ -413,6 +422,7 @@ private fun RatingSection(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun BookInfoCard(book: Book) {
     Card {
@@ -423,31 +433,44 @@ private fun BookInfoCard(book: Book) {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = "Book Information",
+                text = stringResource(R.string.book_detail_info_title),
                 style = MaterialTheme.typography.titleMedium
             )
 
             book.publisher?.let {
-                InfoRow(label = "Publisher", value = it)
+                InfoRow(label = stringResource(R.string.book_detail_publisher), value = it)
             }
 
             book.isbn?.let {
-                InfoRow(label = "ISBN", value = it)
+                InfoRow(label = stringResource(R.string.book_detail_isbn), value = it)
             }
 
             book.isbn13?.let {
-                InfoRow(label = "ISBN-13", value = it)
+                InfoRow(label = stringResource(R.string.book_detail_isbn13), value = it)
             }
 
             if (book.categories.isNotEmpty()) {
-                InfoRow(
-                    label = "Categories",
-                    value = book.categories.joinToString(", ")
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = stringResource(R.string.book_detail_categories),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    book.categories.forEach { category ->
+                        SuggestionChip(
+                            onClick = { },
+                            label = { Text(category) }
+                        )
+                    }
+                }
             }
 
             book.language?.let {
-                InfoRow(label = "Language", value = it)
+                InfoRow(label = stringResource(R.string.book_detail_language), value = it)
             }
         }
     }
@@ -486,7 +509,7 @@ private fun ErrorMessage(error: String, modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.displayMedium
         )
         Text(
-            text = "Error",
+            text = stringResource(R.string.common_error),
             style = MaterialTheme.typography.titleMedium
         )
         Text(

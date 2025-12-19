@@ -22,6 +22,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import android.widget.Toast
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -40,26 +42,26 @@ fun SearchScreen(
 
     LaunchedEffect(Unit) {
         viewModel.events.collect { event ->
-            scope.launch {
-                when (event) {
-                    is SearchEvent.BookAdded -> {
-                        Toast.makeText(context, "${event.bookTitle} added to library", Toast.LENGTH_SHORT).show()
-                        snackbarHostState.showSnackbar(
-                            message = "${event.bookTitle} added to library",
-                            duration = SnackbarDuration.Short
-                        )
-                    }
-                    is SearchEvent.BookAddError -> {
-                        Toast.makeText(context, event.message, Toast.LENGTH_SHORT).show()
-                        snackbarHostState.showSnackbar(
-                            message = event.message,
-                            duration = SnackbarDuration.Short
-                        )
-                    }
+            // Use context.getString() instead of stringResource() here
+            // because we are in a coroutine block, not a Composable block.
+            val message = when (event) {
+                is SearchEvent.BookAdded -> {
+                    context.getString(R.string.search_book_added, event.bookTitle)
+                }
+                is SearchEvent.BookAddError -> {
+                    context.getString(R.string.search_book_add_error)
                 }
             }
+
+            // Now show the UI feedback
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            snackbarHostState.showSnackbar(
+                message = message,
+                duration = SnackbarDuration.Short
+            )
         }
     }
+
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) }
@@ -75,11 +77,11 @@ fun SearchScreen(
             value = uiState.query,
             onValueChange = { viewModel.onQueryChange(it) },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Search books...") },
+            placeholder = { Text(stringResource(R.string.search_placeholder)) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = "Search"
+                    contentDescription = stringResource(R.string.nav_search)
                 )
             },
             trailingIcon = {
@@ -87,7 +89,7 @@ fun SearchScreen(
                     IconButton(onClick = { viewModel.clearSearch() }) {
                         Icon(
                             imageVector = Icons.Default.Clear,
-                            contentDescription = "Clear"
+                            contentDescription = stringResource(R.string.search_clear)
                         )
                     }
                 }
@@ -108,7 +110,7 @@ fun SearchScreen(
                 modifier = Modifier.size(18.dp)
             )
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Can't find your book? Add it manually")
+            Text(stringResource(R.string.search_manual_entry_hint))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -246,7 +248,7 @@ private fun BookSearchItem(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "$it pages",
+                            text = if (it == 1) stringResource(R.string.common_pages_count_singular) else stringResource(R.string.common_pages_count, it),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -274,7 +276,7 @@ private fun BookSearchItem(
                 AnimatedContent(targetState = isAdded, label = "AddedIcon") { added ->
                     Icon(
                         imageVector = if (added) Icons.Default.Check else Icons.Default.Add,
-                        contentDescription = if (added) "Added" else "Add to library"
+                        contentDescription = if (added) stringResource(R.string.common_add) else stringResource(R.string.common_add)
                     )
                 }
             }
@@ -297,7 +299,7 @@ private fun ErrorMessage(error: String) {
                 style = MaterialTheme.typography.displayMedium
             )
             Text(
-                text = "Search failed",
+                text = stringResource(R.string.search_error),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
@@ -324,11 +326,11 @@ private fun EmptySearchResults() {
                 style = MaterialTheme.typography.displayMedium
             )
             Text(
-                text = "No books found",
+                text = stringResource(R.string.search_no_results),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "Try a different search term",
+                text = stringResource(R.string.library_empty_subtitle),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -351,11 +353,11 @@ private fun SearchPrompt() {
                 style = MaterialTheme.typography.displayLarge
             )
             Text(
-                text = "Search for books",
+                text = stringResource(R.string.search_books),
                 style = MaterialTheme.typography.titleLarge
             )
             Text(
-                text = "Enter a title, author, or ISBN",
+                text = stringResource(R.string.search_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

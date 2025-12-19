@@ -16,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import com.foliolib.app.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -74,18 +75,35 @@ class SettingsViewModel @Inject constructor(
 
     private fun loadCurrentLanguage() {
         val locales = AppCompatDelegate.getApplicationLocales()
+        Timber.d("Loading current language. Locales: $locales")
+
         val currentTag = if (!locales.isEmpty) {
             locales.get(0)?.language ?: "en"
         } else {
             "en"
         }
         _uiState.update { it.copy(currentLanguage = currentTag) }
+        Timber.d("Current language loaded: $currentTag")
     }
 
     fun setLanguage(languageCode: String) {
-        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
-        AppCompatDelegate.setApplicationLocales(appLocale)
-        _uiState.update { it.copy(currentLanguage = languageCode, showLanguageDialog = false) }
+        Timber.d("=== setLanguage called with code: $languageCode ===")
+        viewModelScope.launch {
+            try {
+                Timber.d("Setting language to: $languageCode")
+                val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+                Timber.d("Created LocaleListCompat: $appLocale")
+                
+                // This should automatically recreate the activity
+                AppCompatDelegate.setApplicationLocales(appLocale)
+                Timber.d("Called setApplicationLocales")
+
+                _uiState.update { it.copy(currentLanguage = languageCode, showLanguageDialog = false) }
+                Timber.d("Language set successfully. Current locales: ${AppCompatDelegate.getApplicationLocales()}")
+            } catch (e: Exception) {
+                Timber.e(e, "Error setting language")
+            }
+        }
     }
 
     fun showLanguageDialog() {
@@ -304,8 +322,8 @@ class SettingsViewModel @Inject constructor(
 
         val notification = androidx.core.app.NotificationCompat.Builder(context, channelId)
             .setSmallIcon(android.R.drawable.stat_sys_download_done)
-            .setContentTitle("Library Exported")
-            .setContentText("Tap to open ${file.name}")
+            .setContentTitle(context.getString(R.string.settings_export_notification_title))
+            .setContentText(context.getString(R.string.settings_export_notification_text, file.name))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()

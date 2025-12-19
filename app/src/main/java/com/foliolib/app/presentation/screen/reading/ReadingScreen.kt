@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.foliolib.app.presentation.components.book.BookCover
 import java.util.concurrent.TimeUnit
@@ -31,15 +33,15 @@ fun ReadingScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Reading Session") },
+                title = { Text(stringResource(R.string.reading_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 },
                 actions = {
                     IconButton(onClick = { viewModel.showNoteDialog() }) {
-                        Icon(Icons.Default.Note, contentDescription = "Add Note")
+                        Icon(Icons.Default.Note, contentDescription = stringResource(R.string.notes_add))
                     }
                 }
             )
@@ -50,7 +52,7 @@ fun ReadingScreen(
                     viewModel.endSession(onComplete = onNavigateBack)
                 },
                 icon = { Icon(Icons.Default.Check, contentDescription = null) },
-                text = { Text("Finish Reading") }
+                text = { Text(stringResource(R.string.reading_finish)) }
             )
         }
     ) { paddingValues ->
@@ -115,7 +117,7 @@ fun ReadingScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(
-                            text = "Reading Time",
+                            text = stringResource(R.string.reading_time_label),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -140,7 +142,7 @@ fun ReadingScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text(
-                            text = "Current Page",
+                            text = stringResource(R.string.reading_current_page),
                             style = MaterialTheme.typography.titleMedium
                         )
 
@@ -150,14 +152,14 @@ fun ReadingScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Page ${uiState.currentPage}",
+                                text = stringResource(R.string.reading_page_number, uiState.currentPage),
                                 style = MaterialTheme.typography.headlineMedium,
                                 fontWeight = FontWeight.Bold
                             )
 
                             uiState.book?.pageCount?.let { totalPages ->
                                 Text(
-                                    text = "of $totalPages",
+                                    text = stringResource(R.string.reading_of_total, totalPages),
                                     style = MaterialTheme.typography.bodyLarge,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -227,7 +229,10 @@ fun ReadingScreen(
                                         modifier = Modifier.fillMaxWidth()
                                     )
                                     Text(
-                                        text = "${(progress * 100).toInt()}% complete",
+                                        text = stringResource(
+                                            R.string.reading_percent_complete,
+                                            (progress * 100).toInt()
+                                        ),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
@@ -245,12 +250,12 @@ fun ReadingScreen(
         if (uiState.showNoteDialog) {
             AlertDialog(
                 onDismissRequest = { viewModel.hideNoteDialog() },
-                title = { Text("Add Note") },
+                title = { Text(stringResource(R.string.reading_add_note_title)) },
                 text = {
                     OutlinedTextField(
                         value = uiState.noteContent,
                         onValueChange = { viewModel.updateNoteContent(it) },
-                        label = { Text("Your note") },
+                        label = { Text(stringResource(R.string.reading_note_label)) },
                         modifier = Modifier.fillMaxWidth(),
                         minLines = 3,
                         maxLines = 6
@@ -261,12 +266,12 @@ fun ReadingScreen(
                         onClick = { viewModel.saveNote() },
                         enabled = uiState.noteContent.isNotBlank()
                     ) {
-                        Text("Save")
+                        Text(stringResource(R.string.common_save))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.hideNoteDialog() }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.common_cancel))
                     }
                 }
             )

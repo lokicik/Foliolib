@@ -10,13 +10,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.foliolib.app.R
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun AnimatedStreakFlame(
     streak: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = if (streak > 0) 56.sp else 40.sp,
+    showLabels: Boolean = true
 ) {
     // Pulsing animation for the flame
     val infiniteTransition = rememberInfiniteTransition(label = "flame_pulse")
@@ -49,29 +54,31 @@ fun AnimatedStreakFlame(
         // Flame emoji with animation
         Text(
             text = "🔥",
-            fontSize = if (streak > 0) 56.sp else 40.sp,
+            fontSize = fontSize,
             modifier = Modifier.scale(if (streak > 0) scale else 1f)
         )
 
-        // Streak count
-        Text(
-            text = if (streak > 0) "$streak day${if (streak != 1) "s" else ""}" else "No streak",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
-        )
+        if (showLabels) {
+            // Streak count
+            Text(
+                text = if (streak > 0) stringResource(R.string.stats_days, streak) else stringResource(R.string.stats_no_streak),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
 
-        if (streak > 0) {
-            Text(
-                text = "Keep it going!",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        } else {
-            Text(
-                text = "Start reading today",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            if (streak > 0) {
+                Text(
+                    text = stringResource(R.string.home_keep_going),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            } else {
+                Text(
+                    text = stringResource(R.string.home_start_today),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
         }
     }
 }

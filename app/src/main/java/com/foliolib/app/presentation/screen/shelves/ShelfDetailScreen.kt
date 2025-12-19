@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toColorInt
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.foliolib.app.R
+import androidx.compose.ui.res.stringResource
 import com.foliolib.app.presentation.components.book.BookCard
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +60,7 @@ fun ShelfDetailScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 }
             )
@@ -76,7 +78,7 @@ fun ShelfDetailScreen(
         } else if (uiState.books.isEmpty()) {
             EmptyShelfState(
                 modifier = Modifier.padding(paddingValues),
-                shelfName = uiState.shelf?.name ?: "this shelf"
+                shelfName = uiState.shelf?.name ?: stringResource(R.string.shelves_this_shelf)
             )
         } else {
             Column(
@@ -105,7 +107,11 @@ fun ShelfDetailScreen(
                             }
 
                             Text(
-                                text = "${uiState.books.size} ${if (uiState.books.size == 1) "book" else "books"}",
+                                text = if (uiState.books.size == 1) {
+                                    stringResource(R.string.shelves_book_count_singular)
+                                } else {
+                                    stringResource(R.string.shelves_book_count, uiState.books.size)
+                                },
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontWeight = FontWeight.SemiBold
@@ -152,11 +158,11 @@ private fun EmptyShelfState(
                 style = MaterialTheme.typography.displayMedium
             )
             Text(
-                text = "No books in $shelfName",
+                text = stringResource(R.string.shelves_empty_in_name, shelfName),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "Add books from the book detail page",
+                text = stringResource(R.string.shelves_empty_hint_detail),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

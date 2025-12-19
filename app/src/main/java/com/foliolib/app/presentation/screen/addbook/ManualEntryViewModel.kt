@@ -2,6 +2,7 @@ package com.foliolib.app.presentation.screen.addbook
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.foliolib.app.R
 import com.foliolib.app.data.mapper.BookMapper
 import com.foliolib.app.domain.model.BookCondition
 import com.foliolib.app.domain.usecase.book.AddBookUseCase
@@ -16,17 +17,18 @@ import javax.inject.Inject
 
 data class ManualEntryUiState(
     val title: String = "",
-    val titleError: String? = null,
+    val titleError: Int? = null,
     val author: String = "",
-    val authorError: String? = null,
+    val authorError: Int? = null,
     val isbn: String = "",
     val publisher: String = "",
     val publishedDate: String = "",
     val pageCount: String = "",
     val description: String = "",
+    val categories: String = "",
     val condition: BookCondition? = null,
     val isAdding: Boolean = false,
-    val error: String? = null
+    val error: Int? = null
 )
 
 @HiltViewModel
@@ -41,7 +43,7 @@ class ManualEntryViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 title = title,
-                titleError = if (title.isBlank()) "Title is required" else null
+                titleError = if (title.isBlank()) R.string.manual_entry_error_title else null
             )
         }
     }
@@ -50,7 +52,7 @@ class ManualEntryViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 author = author,
-                authorError = if (author.isBlank()) "Author is required" else null
+                authorError = if (author.isBlank()) R.string.manual_entry_error_author else null
             )
         }
     }
@@ -75,6 +77,10 @@ class ManualEntryViewModel @Inject constructor(
         _uiState.update { it.copy(description = description) }
     }
 
+    fun updateCategories(categories: String) {
+        _uiState.update { it.copy(categories = categories) }
+    }
+
     fun updateCondition(condition: BookCondition) {
         _uiState.update { it.copy(condition = condition) }
     }
@@ -84,12 +90,12 @@ class ManualEntryViewModel @Inject constructor(
 
         // Validate required fields
         if (state.title.isBlank()) {
-            _uiState.update { it.copy(titleError = "Title is required") }
+            _uiState.update { it.copy(titleError = R.string.manual_entry_error_title) }
             return
         }
 
         if (state.author.isBlank()) {
-            _uiState.update { it.copy(authorError = "Author is required") }
+            _uiState.update { it.copy(authorError = R.string.manual_entry_error_author) }
             return
         }
 
@@ -104,6 +110,7 @@ class ManualEntryViewModel @Inject constructor(
                 publishedDate = state.publishedDate.takeIf { it.isNotBlank() },
                 pageCount = state.pageCount.toIntOrNull(),
                 description = state.description.takeIf { it.isNotBlank() },
+                categories = state.categories.split(",").map { it.trim() }.filter { it.isNotBlank() },
                 condition = state.condition
             )
 
@@ -117,7 +124,7 @@ class ManualEntryViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             isAdding = false,
-                            error = e.message ?: "Failed to add book"
+                            error = R.string.manual_entry_error_add
                         )
                     }
                 }

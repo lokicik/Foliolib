@@ -31,10 +31,10 @@ class ReminderWorker @AssistedInject constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
-                "Reading Reminders",
+                applicationContext.getString(R.string.reminder_channel_name),
                 NotificationManager.IMPORTANCE_DEFAULT
             ).apply {
-                description = "Daily reminder to read"
+                description = applicationContext.getString(R.string.reminder_channel_description)
             }
             notificationManager.createNotificationChannel(channel)
         }
@@ -45,8 +45,8 @@ class ReminderWorker @AssistedInject constructor(
         
         val notification = NotificationCompat.Builder(applicationContext, channelId)
             .setSmallIcon(android.R.drawable.ic_dialog_info) 
-            .setContentTitle("Time to Read!")
-            .setContentText("Don't forget to read today to keep your streak!")
+            .setContentTitle(applicationContext.getString(R.string.reminder_notification_title))
+            .setContentText(applicationContext.getString(R.string.reminder_notification_text))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
             .build()

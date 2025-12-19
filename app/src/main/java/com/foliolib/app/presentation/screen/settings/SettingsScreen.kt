@@ -38,6 +38,8 @@ import android.provider.Settings
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 
 import androidx.compose.material.icons.filled.Language
 
@@ -90,8 +92,8 @@ fun SettingsScreen(
     if (showPermissionRationale) {
         AlertDialog(
             onDismissRequest = { showPermissionRationale = false },
-            title = { Text("Notification Permission Required") },
-            text = { Text("Foliolib needs notification permission to send reading reminders and export notifications. Please enable it in settings.") },
+            title = { Text(stringResource(R.string.settings_permission_title)) },
+            text = { Text(stringResource(R.string.settings_permission_message)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -102,12 +104,12 @@ fun SettingsScreen(
                         context.startActivity(intent)
                     }
                 ) {
-                    Text("Open Settings")
+                    Text(stringResource(R.string.settings_open_settings))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showPermissionRationale = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -116,7 +118,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") }
+                title = { Text(stringResource(R.string.settings_title)) }
             )
         }
     ) { paddingValues ->
@@ -127,11 +129,11 @@ fun SettingsScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             // Appearance Section
-            SettingsSection(title = "Appearance") {
+            SettingsSection(title = stringResource(R.string.settings_appearance)) {
                 SettingsItem(
                     icon = Icons.Default.Palette,
-                    title = "Dark Theme",
-                    subtitle = if (uiState.isDarkTheme) "Enabled" else "Disabled",
+                    title = stringResource(R.string.settings_dark_theme),
+                    subtitle = if (uiState.isDarkTheme) stringResource(R.string.settings_theme_enabled) else stringResource(R.string.settings_theme_disabled),
                     trailing = {
                         Switch(
                             checked = uiState.isDarkTheme,
@@ -142,11 +144,11 @@ fun SettingsScreen(
 
                 SettingsItem(
                     icon = Icons.Default.Language,
-                    title = "Language",
+                    title = stringResource(R.string.settings_language),
                     subtitle = when (uiState.currentLanguage) {
-                        "es" -> "Español"
-                        "tr" -> "Türkçe"
-                        else -> "English"
+                        "es" -> stringResource(R.string.language_spanish)
+                        "tr" -> stringResource(R.string.language_turkish)
+                        else -> stringResource(R.string.language_english)
                     },
                     onClick = { viewModel.showLanguageDialog() }
                 )
@@ -155,11 +157,11 @@ fun SettingsScreen(
             Divider()
 
             // Notifications Section
-            SettingsSection(title = "Notifications") {
+            SettingsSection(title = stringResource(R.string.settings_notifications)) {
                 SettingsItem(
                     icon = Icons.Default.Notifications,
-                    title = "Reading Reminders",
-                    subtitle = "Daily notifications to maintain your streak",
+                    title = stringResource(R.string.settings_reading_reminders),
+                    subtitle = stringResource(R.string.settings_notifications_subtitle),
                     trailing = {
                         Switch(
                             checked = uiState.notificationsEnabled,
@@ -179,7 +181,7 @@ fun SettingsScreen(
                 if (uiState.notificationsEnabled) {
                     SettingsItem(
                         icon = Icons.Default.Schedule,
-                        title = "Reminder Time",
+                        title = stringResource(R.string.settings_reminder_time),
                         subtitle = String.format("%02d:%02d", uiState.reminderHour, uiState.reminderMinute),
                         onClick = { viewModel.showTimePicker() }
                     )
@@ -189,11 +191,11 @@ fun SettingsScreen(
             Divider()
 
             // Data Section
-            SettingsSection(title = "Data") {
+            SettingsSection(title = stringResource(R.string.settings_data)) {
                 SettingsItem(
                     icon = Icons.Default.Upload,
-                    title = "Export Library",
-                    subtitle = "Export your books to CSV/JSON",
+                    title = stringResource(R.string.settings_export),
+                    subtitle = stringResource(R.string.settings_export_subtitle),
                     onClick = { viewModel.showDataExportDialog() }
                 )
             }
@@ -201,24 +203,24 @@ fun SettingsScreen(
             Divider()
 
             // About Section
-            SettingsSection(title = "About") {
+            SettingsSection(title = stringResource(R.string.settings_about)) {
                 SettingsItem(
                     icon = Icons.Default.Info,
-                    title = "About Foliolib",
-                    subtitle = "Version ${uiState.appVersion}",
+                    title = stringResource(R.string.settings_about_foliolib),
+                    subtitle = stringResource(R.string.settings_version, uiState.appVersion),
                     onClick = { viewModel.showAboutDialog() }
                 )
 
                 SettingsItem(
                     icon = Icons.Default.Description,
-                    title = "Privacy Policy",
-                    subtitle = "How we handle your data"
+                    title = stringResource(R.string.settings_privacy_policy),
+                    subtitle = stringResource(R.string.settings_privacy_subtitle)
                 )
 
                 SettingsItem(
                     icon = Icons.Default.Gavel,
-                    title = "Terms of Service",
-                    subtitle = "Terms and conditions"
+                    title = stringResource(R.string.settings_terms_of_service),
+                    subtitle = stringResource(R.string.settings_terms_subtitle)
                 )
             }
         }
@@ -255,12 +257,12 @@ fun SettingsScreen(
                             viewModel.updateReminderTime(timePickerState.hour, timePickerState.minute)
                         }
                     ) {
-                        Text("OK")
+                        Text(stringResource(R.string.common_ok))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { viewModel.hideTimePicker() }) {
-                        Text("Cancel")
+                        Text(stringResource(R.string.common_cancel))
                     }
                 },
                 text = {
@@ -369,23 +371,23 @@ private fun LanguageDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Select Language") },
+        title = { Text(stringResource(R.string.settings_select_language)) },
         text = {
             Column {
                 LanguageItem(
-                    name = "English",
+                    name = stringResource(R.string.language_english),
                     code = "en",
                     isSelected = currentLanguage == "en",
                     onSelect = onLanguageSelected
                 )
                 LanguageItem(
-                    name = "Español",
+                    name = stringResource(R.string.language_spanish),
                     code = "es",
                     isSelected = currentLanguage == "es",
                     onSelect = onLanguageSelected
                 )
                 LanguageItem(
-                    name = "Türkçe",
+                    name = stringResource(R.string.language_turkish),
                     code = "tr",
                     isSelected = currentLanguage == "tr",
                     onSelect = onLanguageSelected
@@ -394,7 +396,7 @@ private fun LanguageDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text(stringResource(R.string.common_cancel))
             }
         }
     )
@@ -436,19 +438,19 @@ private fun AboutDialog(
         icon = {
             Text("📚", style = MaterialTheme.typography.displayMedium)
         },
-        title = { Text("Foliolib") },
+        title = { Text(stringResource(R.string.app_name)) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text("Version $version")
+                Text(stringResource(R.string.settings_version, version))
                 Text(
-                    "A beautifully designed book management app for tracking your reading journey.",
+                    stringResource(R.string.settings_about_description),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    "Made with ❤️ using Jetpack Compose",
+                    stringResource(R.string.settings_made_with),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -456,7 +458,7 @@ private fun AboutDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Close")
+                Text(stringResource(R.string.action_close))
             }
         }
     )
@@ -473,7 +475,7 @@ private fun DataExportDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Export Library") },
+        title = { Text(stringResource(R.string.settings_export)) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -485,7 +487,7 @@ private fun DataExportDialog(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             CircularProgressIndicator(modifier = Modifier.size(24.dp))
-                            Text("Exporting your library...")
+                            Text(stringResource(R.string.settings_exporting))
                         }
                     }
                     exportSuccess -> {
@@ -498,13 +500,13 @@ private fun DataExportDialog(
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.primary
                             )
-                            Text("Export completed successfully!")
+                            Text(stringResource(R.string.settings_export_success))
                         }
                     }
                     else -> {
-                        Text("Export your entire library to a file. This includes all books, shelves, reading sessions, and notes.")
+                        Text(stringResource(R.string.settings_export_description))
                         Text(
-                            "Choose format:",
+                            stringResource(R.string.settings_export_format),
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -537,18 +539,18 @@ private fun DataExportDialog(
         confirmButton = {
             if (!isExporting && !exportSuccess) {
                 TextButton(onClick = onExport) {
-                    Text("Export")
+                    Text(stringResource(R.string.settings_export))
                 }
             } else if (exportSuccess) {
                 TextButton(onClick = onDismiss) {
-                    Text("Done")
+                    Text(stringResource(R.string.action_close))
                 }
             }
         },
         dismissButton = {
             if (!isExporting && !exportSuccess) {
                 TextButton(onClick = onDismiss) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         }

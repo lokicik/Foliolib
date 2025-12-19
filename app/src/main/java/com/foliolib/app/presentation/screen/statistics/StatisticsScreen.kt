@@ -15,6 +15,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.foliolib.app.domain.model.Statistics
 import com.foliolib.app.domain.repository.AuthorStats
@@ -31,7 +33,7 @@ fun StatisticsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Statistics") }
+                title = { Text(stringResource(R.string.nav_statistics)) }
             )
         }
     ) { paddingValues ->
@@ -63,7 +65,7 @@ fun StatisticsScreen(
                 if (uiState.genreDistribution.isNotEmpty()) {
                     item {
                         Text(
-                            text = "Favorite Genres",
+                            text = stringResource(R.string.stats_favorite_genres),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold
                         )
@@ -78,7 +80,7 @@ fun StatisticsScreen(
                 if (uiState.favoriteAuthors.isNotEmpty()) {
                     item {
                         Text(
-                            text = "Favorite Authors",
+                            text = stringResource(R.string.stats_favorite_authors),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(top = 8.dp)
@@ -94,7 +96,7 @@ fun StatisticsScreen(
                 if (uiState.readingTrends.isNotEmpty()) {
                     item {
                         Text(
-                            text = "Reading Trends",
+                            text = stringResource(R.string.stats_reading_trends),
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(top = 8.dp)
@@ -122,7 +124,7 @@ private fun OverallStatsCard(stats: Statistics) {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Your Reading Journey",
+                text = stringResource(R.string.stats_journey),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -132,12 +134,12 @@ private fun OverallStatsCard(stats: Statistics) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 StatItem(
-                    label = "Books Read",
+                    label = stringResource(R.string.stats_books_read),
                     value = stats.totalBooksRead.toString(),
                     modifier = Modifier.weight(1f)
                 )
                 StatItem(
-                    label = "Pages Read",
+                    label = stringResource(R.string.stats_pages_read),
                     value = stats.totalPagesRead.toString(),
                     modifier = Modifier.weight(1f)
                 )
@@ -148,12 +150,12 @@ private fun OverallStatsCard(stats: Statistics) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 StatItem(
-                    label = "Avg Pages/Day",
+                    label = stringResource(R.string.stats_avg_pages_day),
                     value = String.format("%.1f", stats.averagePagesPerDay),
                     modifier = Modifier.weight(1f)
                 )
                 StatItem(
-                    label = "This Year",
+                    label = stringResource(R.string.stats_this_year),
                     value = stats.booksReadThisYear.toString(),
                     modifier = Modifier.weight(1f)
                 )
@@ -209,7 +211,7 @@ private fun GenreStatsItem(genre: GenreStats) {
                     modifier = Modifier.weight(1f)
                 )
                 Text(
-                    text = "${genre.count} books",
+                    text = stringResource(R.string.common_books_count, genre.count),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -259,7 +261,7 @@ private fun AuthorStatsItem(author: AuthorStats) {
                 modifier = Modifier.weight(1f)
             )
             Text(
-                text = "${author.bookCount} ${if (author.bookCount == 1) "book" else "books"}",
+                text = if (author.bookCount == 1) stringResource(R.string.common_books_count_singular) else stringResource(R.string.common_books_count, author.bookCount),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold
@@ -290,12 +292,12 @@ private fun ReadingTrendItem(trend: ReadingTrend) {
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = "${trend.booksRead} books",
+                    text = if (trend.booksRead == 1) stringResource(R.string.common_books_count_singular) else stringResource(R.string.common_books_count, trend.booksRead),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
-                    text = "${trend.pagesRead} pages",
+                    text = if (trend.pagesRead == 1) stringResource(R.string.common_pages_count_singular) else stringResource(R.string.common_pages_count, trend.pagesRead),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

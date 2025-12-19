@@ -15,6 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.foliolib.app.R
+import androidx.compose.ui.res.stringResource
 import com.foliolib.app.domain.model.Note
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,10 +32,10 @@ fun NotesScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Notes: ${uiState.bookTitle}") },
+                title = { Text(stringResource(R.string.notes_title_with_book, uiState.bookTitle)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBack, contentDescription = stringResource(R.string.back))
                     }
                 }
             )
@@ -42,7 +44,7 @@ fun NotesScreen(
             FloatingActionButton(
                 onClick = { viewModel.showAddDialog() }
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Add Note")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.notes_add))
             }
         }
     ) { paddingValues ->
@@ -121,7 +123,7 @@ private fun NoteCard(
             ) {
                 Icon(
                     Icons.Default.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.common_delete),
                     tint = MaterialTheme.colorScheme.onErrorContainer
                 )
             }
@@ -150,7 +152,7 @@ private fun NoteCard(
                     ) {
                         note.page?.let {
                             Text(
-                                text = "Page $it",
+                                text = stringResource(R.string.notes_page, it),
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.primary,
                                 fontWeight = FontWeight.SemiBold
@@ -176,7 +178,7 @@ private fun NoteCard(
                     IconButton(onClick = { showDeleteDialog = true }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete note",
+                            contentDescription = stringResource(R.string.notes_delete),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -202,8 +204,8 @@ private fun NoteCard(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Delete Note?") },
-            text = { Text("This action cannot be undone.") },
+            title = { Text(stringResource(R.string.notes_delete_confirm)) },
+            text = { Text(stringResource(R.string.common_delete_undone)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -211,12 +213,12 @@ private fun NoteCard(
                         showDeleteDialog = false
                     }
                 ) {
-                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.common_delete), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -236,7 +238,7 @@ private fun AddNoteDialog(
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Add Note") },
+        title = { Text(stringResource(R.string.notes_add)) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -244,7 +246,7 @@ private fun AddNoteDialog(
                 OutlinedTextField(
                     value = noteContent,
                     onValueChange = onContentChange,
-                    label = { Text("Note *") },
+                    label = { Text(stringResource(R.string.notes_content_label)) },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 3,
                     maxLines = 6
@@ -257,7 +259,7 @@ private fun AddNoteDialog(
                     OutlinedTextField(
                         value = notePage,
                         onValueChange = onPageChange,
-                        label = { Text("Page") },
+                        label = { Text(stringResource(R.string.notes_page_label)) },
                         modifier = Modifier.weight(1f),
                         singleLine = true
                     )
@@ -265,7 +267,7 @@ private fun AddNoteDialog(
                     OutlinedTextField(
                         value = noteChapter,
                         onValueChange = onChapterChange,
-                        label = { Text("Chapter") },
+                        label = { Text(stringResource(R.string.notes_chapter_label)) },
                         modifier = Modifier.weight(1f),
                         singleLine = true
                     )
@@ -277,12 +279,12 @@ private fun AddNoteDialog(
                 onClick = onConfirm,
                 enabled = noteContent.isNotBlank()
             ) {
-                Text("Add")
+                Text(stringResource(R.string.common_add))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text(stringResource(R.string.common_cancel))
             }
         }
     )
@@ -303,11 +305,11 @@ private fun EmptyNotesState(modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.displayMedium
             )
             Text(
-                text = "No notes yet",
+                text = stringResource(R.string.notes_empty),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "Tap + to add your first note",
+                text = stringResource(R.string.notes_empty_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

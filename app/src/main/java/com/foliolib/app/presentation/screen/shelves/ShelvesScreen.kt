@@ -17,6 +17,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import androidx.core.graphics.toColorInt
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.foliolib.app.domain.model.Shelf
@@ -32,14 +34,14 @@ fun ShelvesScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Shelves") }
+                title = { Text(stringResource(R.string.shelves_title)) }
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { viewModel.showCreateDialog() }
             ) {
-                Icon(Icons.Default.Add, contentDescription = "Create Shelf")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.shelves_create))
             }
         }
     ) { paddingValues ->
@@ -63,7 +65,7 @@ fun ShelvesScreen(
                 // Default shelves section
                 item {
                     Text(
-                        text = "Default Shelves",
+                        text = stringResource(R.string.shelves_default),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(vertical = 8.dp)
@@ -86,7 +88,7 @@ fun ShelvesScreen(
                 if (customShelves.isNotEmpty()) {
                     item {
                         Text(
-                            text = "Custom Shelves",
+                            text = stringResource(R.string.shelves_custom),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
@@ -180,7 +182,7 @@ private fun ShelfCard(
                     }
 
                     Text(
-                        text = "${shelf.bookCount} books",
+                        text = if (shelf.bookCount == 1) stringResource(R.string.common_books_count_singular) else stringResource(R.string.common_books_count, shelf.bookCount),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -192,7 +194,7 @@ private fun ShelfCard(
                 IconButton(onClick = { showDeleteDialog = true }) {
                     Icon(
                         imageVector = Icons.Default.Delete,
-                        contentDescription = "Delete shelf",
+                        contentDescription = stringResource(R.string.shelves_delete_shelf),
                         tint = MaterialTheme.colorScheme.error
                     )
                 }
@@ -204,8 +206,8 @@ private fun ShelfCard(
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
-            title = { Text("Delete Shelf?") },
-            text = { Text("Books in this shelf will not be deleted, only removed from the shelf.") },
+            title = { Text(stringResource(R.string.shelves_delete)) },
+            text = { Text(stringResource(R.string.shelves_delete_confirm)) },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -213,12 +215,12 @@ private fun ShelfCard(
                         showDeleteDialog = false
                     }
                 ) {
-                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.common_delete), color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.common_cancel))
                 }
             }
         )
@@ -249,7 +251,7 @@ private fun CreateShelfDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Create Shelf") },
+        title = { Text(stringResource(R.string.shelves_create)) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -257,7 +259,7 @@ private fun CreateShelfDialog(
                 OutlinedTextField(
                     value = shelfName,
                     onValueChange = onNameChange,
-                    label = { Text("Shelf Name *") },
+                    label = { Text(stringResource(R.string.shelves_name_label)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
@@ -265,14 +267,14 @@ private fun CreateShelfDialog(
                 OutlinedTextField(
                     value = shelfDescription,
                     onValueChange = onDescriptionChange,
-                    label = { Text("Description") },
+                    label = { Text(stringResource(R.string.shelves_description_label)) },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 2,
                     maxLines = 3
                 )
 
                 Text(
-                    text = "Color",
+                    text = stringResource(R.string.shelves_color_label),
                     style = MaterialTheme.typography.labelMedium
                 )
 
@@ -309,12 +311,12 @@ private fun CreateShelfDialog(
                 onClick = onConfirm,
                 enabled = shelfName.isNotBlank()
             ) {
-                Text("Create")
+                Text(stringResource(R.string.common_ok))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel")
+                Text(stringResource(R.string.common_cancel))
             }
         }
     )

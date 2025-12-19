@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.foliolib.app.R
+import androidx.compose.ui.res.stringResource
 import com.foliolib.app.domain.model.BookCondition
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,12 +28,12 @@ fun ManualEntryScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Book Manually") },
+                title = { Text(stringResource(R.string.manual_entry_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 }
@@ -48,7 +50,7 @@ fun ManualEntryScreen(
         ) {
             // Required fields
             Text(
-                text = "Required Information",
+                text = stringResource(R.string.manual_entry_required),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.primary
             )
@@ -56,22 +58,22 @@ fun ManualEntryScreen(
             OutlinedTextField(
                 value = uiState.title,
                 onValueChange = { viewModel.updateTitle(it) },
-                label = { Text("Title *") },
+                label = { Text(stringResource(R.string.manual_entry_book_title)) },
                 modifier = Modifier.fillMaxWidth(),
                 isError = uiState.titleError != null,
                 supportingText = {
-                    uiState.titleError?.let { Text(it) }
+                    uiState.titleError?.let { Text(stringResource(it)) }
                 }
             )
 
             OutlinedTextField(
                 value = uiState.author,
                 onValueChange = { viewModel.updateAuthor(it) },
-                label = { Text("Author *") },
+                label = { Text(stringResource(R.string.manual_entry_author)) },
                 modifier = Modifier.fillMaxWidth(),
                 isError = uiState.authorError != null,
                 supportingText = {
-                    uiState.authorError?.let { Text(it) }
+                    uiState.authorError?.let { Text(stringResource(it)) }
                 }
             )
 
@@ -79,7 +81,7 @@ fun ManualEntryScreen(
 
             // Optional fields
             Text(
-                text = "Optional Information",
+                text = stringResource(R.string.manual_entry_optional),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -87,7 +89,7 @@ fun ManualEntryScreen(
             OutlinedTextField(
                 value = uiState.isbn,
                 onValueChange = { viewModel.updateIsbn(it) },
-                label = { Text("ISBN") },
+                label = { Text(stringResource(R.string.manual_entry_isbn)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
@@ -95,14 +97,14 @@ fun ManualEntryScreen(
             OutlinedTextField(
                 value = uiState.publisher,
                 onValueChange = { viewModel.updatePublisher(it) },
-                label = { Text("Publisher") },
+                label = { Text(stringResource(R.string.manual_entry_publisher)) },
                 modifier = Modifier.fillMaxWidth()
             )
 
             OutlinedTextField(
                 value = uiState.publishedDate,
                 onValueChange = { viewModel.updatePublishedDate(it) },
-                label = { Text("Published Date (YYYY)") },
+                label = { Text(stringResource(R.string.manual_entry_published_date_hint)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
@@ -110,7 +112,7 @@ fun ManualEntryScreen(
             OutlinedTextField(
                 value = uiState.pageCount,
                 onValueChange = { viewModel.updatePageCount(it) },
-                label = { Text("Page Count") },
+                label = { Text(stringResource(R.string.manual_entry_page_count)) },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
@@ -118,10 +120,18 @@ fun ManualEntryScreen(
             OutlinedTextField(
                 value = uiState.description,
                 onValueChange = { viewModel.updateDescription(it) },
-                label = { Text("Description") },
+                label = { Text(stringResource(R.string.manual_entry_description)) },
                 modifier = Modifier.fillMaxWidth(),
                 minLines = 3,
                 maxLines = 5
+            )
+
+            OutlinedTextField(
+                value = uiState.categories,
+                onValueChange = { viewModel.updateCategories(it) },
+                label = { Text(stringResource(R.string.manual_entry_categories)) },
+                placeholder = { Text(stringResource(R.string.manual_entry_categories_hint)) },
+                modifier = Modifier.fillMaxWidth()
             )
 
             // Book Condition Selector
@@ -132,10 +142,10 @@ fun ManualEntryScreen(
                 onExpandedChange = { conditionExpanded = it }
             ) {
                 OutlinedTextField(
-                    value = uiState.condition?.name?.replace("_", " ") ?: "Select Condition",
+                    value = uiState.condition?.name?.replace("_", " ") ?: stringResource(R.string.manual_entry_select_condition),
                     onValueChange = {},
                     readOnly = true,
-                    label = { Text("Condition") },
+                    label = { Text(stringResource(R.string.manual_entry_condition)) },
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(expanded = conditionExpanded)
                     },
@@ -180,14 +190,14 @@ fun ManualEntryScreen(
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 } else {
-                    Text("Add to Library")
+                    Text(stringResource(R.string.manual_entry_add_to_library))
                 }
             }
 
             // Error message
             if (uiState.error != null) {
                 Text(
-                    text = uiState.error!!,
+                    text = stringResource(uiState.error!!),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error
                 )

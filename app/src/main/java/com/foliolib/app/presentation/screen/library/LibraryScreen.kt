@@ -12,6 +12,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.foliolib.app.presentation.components.book.BookCard
@@ -29,13 +31,13 @@ fun LibraryScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("My Library") },
+                title = { Text(stringResource(R.string.library_my_library)) },
                 actions = {
                     // Toggle view mode
                     IconButton(onClick = { viewModel.toggleViewMode() }) {
                         Icon(
                             imageVector = if (uiState.isGridView) Icons.Default.List else Icons.Default.GridView,
-                            contentDescription = if (uiState.isGridView) "List view" else "Grid view"
+                            contentDescription = if (uiState.isGridView) stringResource(R.string.library_list_view) else stringResource(R.string.library_grid_view)
                         )
                     }
 
@@ -43,7 +45,7 @@ fun LibraryScreen(
                     IconButton(onClick = { showSortMenu = true }) {
                         Icon(
                             imageVector = Icons.Default.Sort,
-                            contentDescription = "Sort"
+                            contentDescription = stringResource(R.string.library_sort)
                         )
                     }
 
@@ -56,10 +58,10 @@ fun LibraryScreen(
                                 text = {
                                     Text(
                                         when (option) {
-                                            SortOption.TITLE -> "Title"
-                                            SortOption.AUTHOR -> "Author"
-                                            SortOption.DATE_ADDED -> "Date Added"
-                                            SortOption.RATING -> "Rating"
+                                            SortOption.TITLE -> stringResource(R.string.library_sort_title)
+                                            SortOption.AUTHOR -> stringResource(R.string.library_sort_author)
+                                            SortOption.DATE_ADDED -> stringResource(R.string.library_sort_date)
+                                            SortOption.RATING -> stringResource(R.string.library_sort_rating)
                                         }
                                     )
                                 },
@@ -166,11 +168,11 @@ private fun EmptyLibrary(modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.displayLarge
         )
         Text(
-            text = "Your library is empty",
+            text = stringResource(R.string.library_empty_title),
             style = MaterialTheme.typography.headlineSmall
         )
         Text(
-            text = "Search for books and add them to your collection",
+            text = stringResource(R.string.library_empty_subtitle),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

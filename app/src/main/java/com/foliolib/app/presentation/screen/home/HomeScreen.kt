@@ -15,6 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.foliolib.app.presentation.components.book.BookCard
 import com.foliolib.app.ui.theme.StatusReading
@@ -30,7 +33,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Foliolib") }
+                title = { Text(stringResource(R.string.app_name)) }
             )
         }
     ) { paddingValues ->
@@ -92,12 +95,12 @@ private fun ReadingStreakCard(streak: Int) {
         ) {
             Column {
                 Text(
-                    text = "Reading Streak",
+                    text = stringResource(R.string.home_reading_streak),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
                 Text(
-                    text = if (streak > 0) "$streak day${if (streak != 1) "s" else ""}" else "Start today!",
+                    text = if (streak > 0) stringResource(R.string.stats_days, streak) else stringResource(R.string.home_start_reading),
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -106,7 +109,8 @@ private fun ReadingStreakCard(streak: Int) {
 
             com.foliolib.app.presentation.components.reading.AnimatedStreakFlame(
                 streak = streak,
-                modifier = Modifier.size(64.dp)
+                fontSize = 48.sp,
+                showLabels = false
             )
         }
     }
@@ -122,13 +126,13 @@ private fun QuickStats(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         StatCard(
-            title = "Total Books",
+            title = stringResource(R.string.home_total_books),
             value = totalBooks.toString(),
             modifier = Modifier.weight(1f)
         )
 
         StatCard(
-            title = "Finished",
+            title = stringResource(R.string.home_finished_books),
             value = finishedBooks.toString(),
             modifier = Modifier.weight(1f)
         )
@@ -169,7 +173,7 @@ private fun CurrentlyReadingSection(
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(
-            text = "Currently Reading",
+            text = stringResource(R.string.home_currently_reading),
             style = MaterialTheme.typography.titleLarge
         )
 
@@ -204,11 +208,11 @@ private fun EmptyCurrentlyReading() {
                 style = MaterialTheme.typography.displayMedium
             )
             Text(
-                text = "No books in progress",
+                text = stringResource(R.string.home_no_books),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "Start reading a book from your library",
+                text = stringResource(R.string.home_start_reading),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )

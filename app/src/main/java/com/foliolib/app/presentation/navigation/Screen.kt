@@ -15,6 +15,9 @@ sealed class Screen(val route: String) {
 
     data object AddBook : Screen("add_book")
     data object ManualEntry : Screen("manual_entry")
+    data object EditBook : Screen("edit_book/{bookId}") {
+        fun createRoute(bookId: String) = "edit_book/$bookId"
+    }
     data object ScanIsbn : Screen("scan_isbn")
 
     data object ReadingSession : Screen("reading/{bookId}") {

@@ -12,12 +12,13 @@ import androidx.compose.material.icons.outlined.LibraryBooks
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.foliolib.app.R
 
 data class BottomNavItem(
     val route: String,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
-    val label: String
+    val labelResId: Int // Keep this as an Int to support multi-language strings
 )
 
 val bottomNavItems = listOf(
@@ -25,30 +26,30 @@ val bottomNavItems = listOf(
         route = Screen.Home.route,
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home,
-        label = "Home"
+        labelResId = R.string.nav_home
     ),
     BottomNavItem(
         route = Screen.Library.route,
         selectedIcon = Icons.Filled.LibraryBooks,
         unselectedIcon = Icons.Outlined.LibraryBooks,
-        label = "Library"
+        labelResId = R.string.nav_library
     ),
     BottomNavItem(
         route = Screen.Search.route,
         selectedIcon = Icons.Filled.Search,
         unselectedIcon = Icons.Outlined.Search,
-        label = "Search"
+        labelResId = R.string.nav_search
     ),
     BottomNavItem(
         route = Screen.Statistics.route,
         selectedIcon = Icons.Filled.BarChart,
         unselectedIcon = Icons.Outlined.BarChart,
-        label = "Stats"
+        labelResId = R.string.nav_statistics
     ),
     BottomNavItem(
         route = Screen.Profile.route,
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person,
-        label = "Profile"
+        labelResId = R.string.nav_profile
     )
 )

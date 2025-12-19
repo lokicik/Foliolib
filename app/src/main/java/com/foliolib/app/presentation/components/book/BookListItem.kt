@@ -10,7 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.foliolib.app.R
 import com.foliolib.app.domain.model.Book
+import com.foliolib.app.domain.model.ReadingStatus
 
 @Composable
 fun BookListItem(
@@ -63,10 +66,10 @@ fun BookListItem(
                     // Reading status badge
                     Text(
                         text = when (book.readingStatus) {
-                            com.foliolib.app.domain.model.ReadingStatus.READING -> "Reading"
-                            com.foliolib.app.domain.model.ReadingStatus.FINISHED -> "Finished"
-                            com.foliolib.app.domain.model.ReadingStatus.WANT_TO_READ -> "Want to Read"
-                            com.foliolib.app.domain.model.ReadingStatus.DNF -> "DNF"
+                            ReadingStatus.READING -> stringResource(R.string.status_reading)
+                            ReadingStatus.FINISHED -> stringResource(R.string.status_finished)
+                            ReadingStatus.WANT_TO_READ -> stringResource(R.string.status_want_to_read)
+                            ReadingStatus.DNF -> stringResource(R.string.status_dnf)
                             else -> ""
                         },
                         style = MaterialTheme.typography.labelSmall,
@@ -81,7 +84,7 @@ fun BookListItem(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "${book.currentPage}/${book.pageCount} pages",
+                            text = stringResource(R.string.book_detail_pages, book.currentPage, book.pageCount),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

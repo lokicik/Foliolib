@@ -1,6 +1,7 @@
 package com.foliolib.app
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -10,16 +11,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import androidx.core.os.LocaleListCompat
 import com.foliolib.app.presentation.MainViewModel
 import com.foliolib.app.presentation.navigation.FolioApp
 import com.foliolib.app.ui.theme.FoliolibTheme
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,6 +31,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Log the current locale for debugging
+        val currentLocales = AppCompatDelegate.getApplicationLocales()
+        Timber.d("MainActivity onCreate - Current locales: $currentLocales")
+        Timber.d("MainActivity onCreate - Resources locale: ${resources.configuration.locales[0]}")
+
         enableEdgeToEdge()
         setContent {
             // Request notification permission on startup
