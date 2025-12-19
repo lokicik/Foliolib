@@ -75,6 +75,16 @@
     <string name="search_books">Kitap ara</string>
     <string name="search_hint">Başlık, yazar veya ISBN girin</string>
 
+    <string name="edit_book_title">Kitabı Düzenle</string>
+    <string name="edit_book_save">Değişiklikleri Kaydet</string>
+    <string name="error_book_not_found">Kitap bulunamadı</string>
+
+    <string name="reading_history_title">Okuma Geçmişi</string>
+    <string name="reading_history_empty">Henüz okuma oturumu yok</string>
+    <string name="reading_history_pages_read">%d sayfa okundu</string>
+    <string name="reading_history_duration">Süre: %s</string>
+    <string name="reading_history_pages_range">Sayfalar %d - %d</string>
+
     <!-- Reading -->
     <string name="reading_title">Okuma Oturumu</string>
     <string name="reading_finish">Okumayı Bitir</string>

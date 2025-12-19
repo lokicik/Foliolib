@@ -220,6 +220,12 @@
     <string name="error">Error</string>
     <string name="back">Back</string>
 
+    <string name="reading_history_title">Reading History</string>
+    <string name="reading_history_empty">No reading sessions yet</string>
+    <string name="reading_history_pages_read">%d pages read</string>
+    <string name="reading_history_duration">Duration: %s</string>
+    <string name="reading_history_pages_range">Pages %d - %d</string>
+
     <!-- Manual Entry -->
     <string name="manual_entry_title">Add Book Manually</string>
     <string name="manual_entry_required">Required Information</string>

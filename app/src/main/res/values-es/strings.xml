@@ -95,6 +95,16 @@
     <string name="search_books">Buscar libros</string>
     <string name="search_hint">Introduce un título, autor o ISBN</string>
 
+    <string name="edit_book_title">Editar libro</string>
+    <string name="edit_book_save">Guardar cambios</string>
+    <string name="error_book_not_found">Libro no encontrado</string>
+
+    <string name="reading_history_title">Historial de lectura</string>
+    <string name="reading_history_empty">No hay sesiones de lectura aún</string>
+    <string name="reading_history_pages_read">%d páginas leídas</string>
+    <string name="reading_history_duration">Duración: %s</string>
+    <string name="reading_history_pages_range">Páginas %d - %d</string>
+
     <!-- Reading -->
     <string name="reading_title">Sesión de Lectura</string>
     <string name="reading_finish">Terminar Lectura</string>

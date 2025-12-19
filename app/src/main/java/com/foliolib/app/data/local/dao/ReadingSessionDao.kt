@@ -58,4 +58,7 @@ interface ReadingSessionDao {
 
     @Query("SELECT * FROM reading_sessions ORDER BY start_time DESC")
     suspend fun getAllSessionsSync(): List<ReadingSessionEntity>
+
+    @Query("DELETE FROM reading_sessions WHERE pages_read <= 0")
+    suspend fun deleteEmptySessions()
 }

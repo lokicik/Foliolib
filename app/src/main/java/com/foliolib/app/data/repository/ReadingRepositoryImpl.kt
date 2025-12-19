@@ -1,6 +1,7 @@
 package com.foliolib.app.data.repository
 
 import com.foliolib.app.core.di.IoDispatcher
+import com.foliolib.app.data.local.dao.BookDao
 import com.foliolib.app.data.local.dao.NoteDao
 import com.foliolib.app.data.local.dao.ReadingSessionDao
 import com.foliolib.app.data.local.entity.HighlightEntity
@@ -22,6 +23,7 @@ import javax.inject.Singleton
 class ReadingRepositoryImpl @Inject constructor(
     private val readingSessionDao: ReadingSessionDao,
     private val noteDao: NoteDao,
+    private val bookDao: BookDao,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ReadingRepository {
 
@@ -31,12 +33,14 @@ class ReadingRepositoryImpl @Inject constructor(
     override suspend fun startReadingSession(bookId: String): Result<ReadingSession> =
         withContext(ioDispatcher) {
             try {
+                val book = bookDao.getBookByIdOnce(bookId)
+                val startPage = book?.currentPage ?: 0
                 val currentTime = System.currentTimeMillis()
                 val session = ReadingSessionEntity(
                     id = UUID.randomUUID().toString(),
                     bookId = bookId,
-                    startPage = 0, // Will be updated when session ends
-                    endPage = 0,
+                    startPage = startPage,
+                    endPage = startPage,
                     startTime = currentTime,
                     endTime = currentTime,
                     duration = 0,
@@ -65,16 +69,21 @@ class ReadingRepositoryImpl @Inject constructor(
             try {
                 val session = readingSessionDao.getSessionById(sessionId)
                 if (session != null) {
-                    val endTime = System.currentTimeMillis()
-                    val duration = endTime - session.startTime
-                    val updatedSession = session.copy(
-                        endTime = endTime,
-                        duration = duration,
-                        pagesRead = pagesRead,
-                        endPage = session.startPage + pagesRead
-                    )
-                    readingSessionDao.updateSession(updatedSession)
-                    Result.success(Unit)
+                    if (pagesRead <= 0) {
+                        readingSessionDao.deleteSession(session)
+                        Result.success(Unit)
+                    } else {
+                        val endTime = System.currentTimeMillis()
+                        val duration = endTime - session.startTime
+                        val updatedSession = session.copy(
+                            endTime = endTime,
+                            duration = duration,
+                            pagesRead = pagesRead,
+                            endPage = session.startPage + pagesRead
+                        )
+                        readingSessionDao.updateSession(updatedSession)
+                        Result.success(Unit)
+                    }
                 } else {
                     Result.failure(Exception("Session not found"))
                 }
@@ -257,6 +266,20 @@ class ReadingRepositoryImpl @Inject constructor(
     override fun getHighlightsForBook(bookId: String): Flow<List<String>> =
         noteDao.getHighlightsForBook(bookId).map { highlights ->
             highlights.map { it.text }
+        }
+
+    override suspend fun deleteEmptySessions() = withContext(ioDispatcher) {
+        readingSessionDao.deleteEmptySessions()
+    }
+
+    override suspend fun deleteSessionsForBook(bookId: String): Result<Unit> =
+        withContext(ioDispatcher) {
+            try {
+                readingSessionDao.deleteSessionsForBook(bookId)
+                Result.success(Unit)
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
         }
 
     // Mappers

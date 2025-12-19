@@ -26,6 +26,7 @@ fun BookDetailScreen(
     onStartReading: (String) -> Unit = {},
     onViewNotes: (String) -> Unit = {},
     onEditBook: (String) -> Unit = {},
+    onViewHistory: (String) -> Unit = {},
     viewModel: BookDetailViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -47,6 +48,12 @@ fun BookDetailScreen(
                         Icon(
                             imageVector = Icons.Default.Edit,
                             contentDescription = stringResource(R.string.edit_book_title)
+                        )
+                    }
+                    IconButton(onClick = { uiState.book?.let { onViewHistory(it.id) } }) {
+                        Icon(
+                            imageVector = Icons.Default.History,
+                            contentDescription = stringResource(R.string.reading_history_title)
                         )
                     }
                     IconButton(onClick = { uiState.book?.let { onViewNotes(it.id) } }) {

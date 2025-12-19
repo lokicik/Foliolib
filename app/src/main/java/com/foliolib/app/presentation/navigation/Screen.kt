@@ -24,6 +24,10 @@ sealed class Screen(val route: String) {
         fun createRoute(bookId: String) = "reading/$bookId"
     }
 
+    data object ReadingHistory : Screen("history/{bookId}") {
+        fun createRoute(bookId: String) = "history/$bookId"
+    }
+
     data object Shelves : Screen("shelves")
 
     data object ShelfDetail : Screen("shelf/{shelfId}") {
