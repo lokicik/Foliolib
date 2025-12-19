@@ -210,18 +210,6 @@ fun SettingsScreen(
                     subtitle = stringResource(R.string.settings_version, uiState.appVersion),
                     onClick = { viewModel.showAboutDialog() }
                 )
-
-                SettingsItem(
-                    icon = Icons.Default.Description,
-                    title = stringResource(R.string.settings_privacy_policy),
-                    subtitle = stringResource(R.string.settings_privacy_subtitle)
-                )
-
-                SettingsItem(
-                    icon = Icons.Default.Gavel,
-                    title = stringResource(R.string.settings_terms_of_service),
-                    subtitle = stringResource(R.string.settings_terms_subtitle)
-                )
             }
         }
 

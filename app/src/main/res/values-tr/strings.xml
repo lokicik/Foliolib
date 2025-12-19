@@ -31,10 +31,7 @@
     <string name="settings_reminder_time">Hatırlatıcı Saati</string>    <string name="reminder_channel_name">Okuma Hatırlatıcıları</string>
     <string name="reminder_channel_description">Günlük okuma hatırlatıcısı</string>
     <string name="reminder_notification_title">Okuma Vakti!</string>
-    <string name="reminder_notification_text">Serini bozmamak için bugün okumayı unutma!</string>    <string name="settings_privacy_policy">Gizlilik Politikası</string>
-    <string name="settings_privacy_subtitle">Verilerinizi nasıl işliyoruz</string>
-    <string name="settings_terms_of_service">Kullanım Koşulları</string>
-    <string name="settings_terms_subtitle">Şartlar ve koşullar</string>
+    <string name="reminder_notification_text">Serini bozmamak için bugün okumayı unutma!</string>
     <string name="settings_version">Versiyon %s</string>
     <string name="settings_about_description">Okuma yolculuğunuzu takip etmek için güzel tasarlanmış bir kitap yönetim uygulaması.</string>
     <string name="settings_made_with">Jetpack Compose kullanılarak ❤️ ile yapıldı</string>
@@ -74,6 +71,16 @@
     <string name="search_clear">Temizle</string>
     <string name="search_books">Kitap ara</string>
     <string name="search_hint">Başlık, yazar veya ISBN girin</string>
+
+    <string name="edit_book_title">Kitabı Düzenle</string>
+    <string name="edit_book_save">Değişiklikleri Kaydet</string>
+    <string name="error_book_not_found">Kitap bulunamadı</string>
+
+    <string name="reading_history_title">Okuma Geçmişi</string>
+    <string name="reading_history_empty">Henüz okuma oturumu yok</string>
+    <string name="reading_history_pages_read">%d sayfa okundu</string>
+    <string name="reading_history_duration">Süre: %s</string>
+    <string name="reading_history_pages_range">Sayfalar %d - %d</string>
 
     <!-- Reading -->
     <string name="reading_title">Okuma Oturumu</string>

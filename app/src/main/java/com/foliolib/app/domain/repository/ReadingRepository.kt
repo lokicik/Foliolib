@@ -17,6 +17,8 @@ interface ReadingRepository {
     suspend fun getReadingStreak(): Result<Int>
     suspend fun getLongestStreak(): Result<Int>
     suspend fun getLastReadingDate(): Result<Long?>
+    suspend fun deleteEmptySessions()
+    suspend fun deleteSessionsForBook(bookId: String): Result<Unit>
 
     // Notes
     suspend fun addNote(note: Note): Result<Unit>

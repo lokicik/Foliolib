@@ -33,10 +33,6 @@
     <string name="reminder_channel_description">Daily reminder to read</string>
     <string name="reminder_notification_title">Time to Read!</string>
     <string name="reminder_notification_text">Don\'t forget to read today to keep your streak!</string>
-    <string name="settings_privacy_policy">Privacy Policy</string>
-    <string name="settings_privacy_subtitle">How we handle your data</string>
-    <string name="settings_terms_of_service">Terms of Service</string>
-    <string name="settings_terms_subtitle">Terms and conditions</string>
     <string name="settings_version">Version %s</string>
     <string name="settings_about_description">A beautifully designed book management app for tracking your reading journey.</string>
     <string name="settings_made_with">Made with  using Jetpack Compose</string>
@@ -219,6 +215,12 @@
     <string name="loading">Loading</string>
     <string name="error">Error</string>
     <string name="back">Back</string>
+
+    <string name="reading_history_title">Reading History</string>
+    <string name="reading_history_empty">No reading sessions yet</string>
+    <string name="reading_history_pages_read">%d pages read</string>
+    <string name="reading_history_duration">Duration: %s</string>
+    <string name="reading_history_pages_range">Pages %d - %d</string>
 
     <!-- Manual Entry -->
     <string name="manual_entry_title">Add Book Manually</string>

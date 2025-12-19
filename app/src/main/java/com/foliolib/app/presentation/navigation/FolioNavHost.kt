@@ -1,4 +1,5 @@
 package com.foliolib.app.presentation.navigation
+import com.foliolib.app.presentation.screen.history.ReadingHistoryScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -17,6 +18,7 @@ import androidx.navigation.navArgument
 import com.foliolib.app.presentation.screen.addbook.ManualEntryScreen
 import com.foliolib.app.presentation.screen.editbook.EditBookScreen
 import com.foliolib.app.presentation.screen.bookdetail.BookDetailScreen
+import com.foliolib.app.presentation.screen.history.ReadingHistoryScreen
 import com.foliolib.app.presentation.screen.home.HomeScreen
 import com.foliolib.app.presentation.screen.library.LibraryScreen
 import com.foliolib.app.presentation.screen.notes.NotesScreen
@@ -82,6 +84,7 @@ fun FolioApp() {
     }
 }
 
+
 @Composable
 fun FolioNavHost(
     navController: NavHostController,
@@ -140,6 +143,9 @@ fun FolioNavHost(
                 },
                 onEditBook = { bookId ->
                     navController.navigate(Screen.EditBook.createRoute(bookId))
+                },
+                onViewHistory = { bookId ->
+                    navController.navigate(Screen.ReadingHistory.createRoute(bookId))
                 }
             )
         }
@@ -174,6 +180,15 @@ fun FolioNavHost(
             arguments = listOf(navArgument("bookId") { type = NavType.StringType })
         ) {
             ReadingScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = Screen.ReadingHistory.route,
+            arguments = listOf(navArgument("bookId") { type = NavType.StringType })
+        ) {
+            ReadingHistoryScreen(
                 onNavigateBack = { navController.popBackStack() }
             )
         }

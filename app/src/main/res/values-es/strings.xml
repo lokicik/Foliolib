@@ -33,10 +33,6 @@
     <string name="reminder_channel_description">Recordatorio diario para leer</string>
     <string name="reminder_notification_title">Hora de Leer!</string>
     <string name="reminder_notification_text">No olvides leer hoy para mantener tu racha!</string>
-    <string name="settings_privacy_policy">Política de Privacidad</string>
-    <string name="settings_privacy_subtitle">Cómo manejamos tus datos</string>
-    <string name="settings_terms_of_service">Términos de Servicio</string>
-    <string name="settings_terms_subtitle">Términos y condiciones</string>
     <string name="settings_version">Versión %s</string>
     <string name="settings_about_description">Una aplicación de gestión de libros bellamente diseñada para seguir tu viaje de lectura.</string>
     <string name="settings_made_with">Hecho con  usando Jetpack Compose</string>
@@ -94,6 +90,16 @@
     <string name="search_clear">Borrar</string>
     <string name="search_books">Buscar libros</string>
     <string name="search_hint">Introduce un título, autor o ISBN</string>
+
+    <string name="edit_book_title">Editar libro</string>
+    <string name="edit_book_save">Guardar cambios</string>
+    <string name="error_book_not_found">Libro no encontrado</string>
+
+    <string name="reading_history_title">Historial de lectura</string>
+    <string name="reading_history_empty">No hay sesiones de lectura aún</string>
+    <string name="reading_history_pages_read">%d páginas leídas</string>
+    <string name="reading_history_duration">Duración: %s</string>
+    <string name="reading_history_pages_range">Páginas %d - %d</string>
 
     <!-- Reading -->
     <string name="reading_title">Sesión de Lectura</string>
