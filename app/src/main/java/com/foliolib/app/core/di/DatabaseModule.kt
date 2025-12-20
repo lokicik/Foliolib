@@ -35,12 +35,6 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideShelfDao(database: FolioDatabase): ShelfDao {
-        return database.shelfDao()
-    }
-
-    @Provides
-    @Singleton
     fun provideReadingSessionDao(database: FolioDatabase): ReadingSessionDao {
         return database.readingSessionDao()
     }
@@ -49,12 +43,6 @@ object DatabaseModule {
     @Singleton
     fun provideNoteDao(database: FolioDatabase): NoteDao {
         return database.noteDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideGoalDao(database: FolioDatabase): GoalDao {
-        return database.goalDao()
     }
 
     @Provides

@@ -26,8 +26,4 @@ interface ReadingRepository {
     suspend fun deleteNote(noteId: String): Result<Unit>
     fun getNotesForBook(bookId: String): Flow<List<Note>>
     fun getAllNotes(): Flow<List<Note>>
-
-    // Highlights
-    suspend fun addHighlight(bookId: String, text: String, pageNumber: Int?): Result<Unit>
-    fun getHighlightsForBook(bookId: String): Flow<List<String>>
 }

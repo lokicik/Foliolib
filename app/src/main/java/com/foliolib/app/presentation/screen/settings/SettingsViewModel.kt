@@ -7,7 +7,6 @@ import androidx.work.PeriodicWorkRequestBuilder
 import android.content.Context
 import androidx.work.WorkManager
 import com.foliolib.app.domain.repository.BookRepository
-import com.foliolib.app.domain.repository.ShelfRepository
 import com.foliolib.app.domain.repository.UserPreferencesRepository
 import com.foliolib.app.worker.ReminderWorker
 import com.squareup.moshi.Moshi
@@ -59,7 +58,6 @@ data class SettingsUiState(
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val shelfRepository: ShelfRepository,
     private val userPreferencesRepository: UserPreferencesRepository,
     private val bookRepository: BookRepository,
     private val workManager: WorkManager
@@ -215,18 +213,6 @@ class SettingsViewModel @Inject constructor(
 
     fun hideDataExportDialog() {
         _uiState.update { it.copy(showDataExportDialog = false, exportSuccess = false) }
-    }
-
-    fun initializeDefaultShelves() {
-        viewModelScope.launch {
-            shelfRepository.ensureDefaultShelves()
-                .onSuccess {
-                    Timber.d("Default shelves initialized successfully")
-                }
-                .onFailure { error ->
-                    Timber.e(error, "Failed to initialize default shelves")
-                }
-        }
     }
 
     fun setExportFormat(format: ExportFormat) {

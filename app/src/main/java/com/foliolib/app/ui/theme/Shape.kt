@@ -28,6 +28,3 @@ val BottomSheetShape = RoundedCornerShape(
     bottomStart = 0.dp,
     bottomEnd = 0.dp
 )
-
-// Shelf shape (for bookshelf UI)
-val ShelfShape = RoundedCornerShape(8.dp)

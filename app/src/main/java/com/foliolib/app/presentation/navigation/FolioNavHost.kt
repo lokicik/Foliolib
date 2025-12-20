@@ -25,8 +25,6 @@ import com.foliolib.app.presentation.screen.notes.NotesScreen
 import com.foliolib.app.presentation.screen.reading.ReadingScreen
 import com.foliolib.app.presentation.screen.search.SearchScreen
 import com.foliolib.app.presentation.screen.settings.SettingsScreen
-import com.foliolib.app.presentation.screen.shelves.ShelfDetailScreen
-import com.foliolib.app.presentation.screen.shelves.ShelvesScreen
 import com.foliolib.app.presentation.screen.statistics.StatisticsScreen
 
 @Composable
@@ -199,26 +197,6 @@ fun FolioNavHost(
         ) {
             NotesScreen(
                 onNavigateBack = { navController.popBackStack() }
-            )
-        }
-
-        composable(Screen.Shelves.route) {
-            ShelvesScreen(
-                onShelfClick = { shelfId ->
-                    navController.navigate(Screen.ShelfDetail.createRoute(shelfId))
-                }
-            )
-        }
-
-        composable(
-            route = Screen.ShelfDetail.route,
-            arguments = listOf(navArgument("shelfId") { type = NavType.StringType })
-        ) {
-            ShelfDetailScreen(
-                onNavigateBack = { navController.popBackStack() },
-                onBookClick = { bookId ->
-                    navController.navigate(Screen.BookDetail.createRoute(bookId))
-                }
             )
         }
     }

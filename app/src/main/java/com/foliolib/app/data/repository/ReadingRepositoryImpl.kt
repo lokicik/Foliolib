@@ -4,7 +4,6 @@ import com.foliolib.app.core.di.IoDispatcher
 import com.foliolib.app.data.local.dao.BookDao
 import com.foliolib.app.data.local.dao.NoteDao
 import com.foliolib.app.data.local.dao.ReadingSessionDao
-import com.foliolib.app.data.local.entity.HighlightEntity
 import com.foliolib.app.data.local.entity.NoteEntity
 import com.foliolib.app.data.local.entity.ReadingSessionEntity
 import com.foliolib.app.domain.model.Note
@@ -242,30 +241,6 @@ class ReadingRepositoryImpl @Inject constructor(
     override fun getAllNotes(): Flow<List<Note>> =
         noteDao.getAllNotes().map { notes ->
             notes.map { it.toDomainModel() }
-        }
-
-    // Highlights
-    override suspend fun addHighlight(bookId: String, text: String, pageNumber: Int?): Result<Unit> =
-        withContext(ioDispatcher) {
-            try {
-                val highlight = HighlightEntity(
-                    id = UUID.randomUUID().toString(),
-                    bookId = bookId,
-                    text = text,
-                    page = pageNumber,
-                    color = "#FFEB3B", // Default yellow
-                    createdAt = System.currentTimeMillis()
-                )
-                noteDao.insertHighlight(highlight)
-                Result.success(Unit)
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-        }
-
-    override fun getHighlightsForBook(bookId: String): Flow<List<String>> =
-        noteDao.getHighlightsForBook(bookId).map { highlights ->
-            highlights.map { it.text }
         }
 
     override suspend fun deleteEmptySessions() = withContext(ioDispatcher) {

@@ -158,26 +158,6 @@
     <string name="notes_chapter_label">Chapter</string>
     <string name="notes_content_label">Note *</string>
 
-    <!-- Shelves -->
-    <string name="shelves_title">Shelves</string>
-    <string name="shelves_name_label">Shelf Name</string>
-    <string name="shelves_description_label">Description (Optional)</string>
-    <string name="shelves_select_color">Select Color</string>
-    <string name="shelves_delete_shelf">Delete shelf</string>
-    <string name="shelves_delete_title">Delete Shelf?</string>
-    <string name="shelves_delete_message">Books in this shelf will not be deleted, only removed from the shelf.</string>
-    <string name="shelves_default">Default Shelves</string>
-    <string name="shelves_custom">My Shelves</string>
-    <string name="shelves_create">Create Shelf</string>
-    <string name="shelves_delete">Delete Shelf</string>
-    <string name="shelves_delete_confirm">Delete this shelf? Books won\'t be deleted.</string>
-    <string name="shelves_book_count">%d books</string>
-    <string name="shelves_book_count_singular">1 book</string>
-    <string name="shelves_this_shelf">this shelf</string>
-    <string name="shelves_empty_in_name">No books in %s</string>
-    <string name="shelves_empty_hint_detail">Add books from the book detail page</string>
-    <string name="shelves_color_label">Color</string>
-
     <!-- Home -->
     <string name="home_title">Home</string>
     <string name="home_reading_streak">Reading Streak</string>

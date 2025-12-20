@@ -9,12 +9,8 @@ import com.foliolib.app.data.local.entity.*
 @Database(
     entities = [
         BookEntity::class,
-        ShelfEntity::class,
-        BookShelfCrossRef::class,
         ReadingSessionEntity::class,
         NoteEntity::class,
-        HighlightEntity::class,
-        GoalEntity::class,
         UserPreferencesEntity::class
     ],
     version = 1,
@@ -24,10 +20,8 @@ import com.foliolib.app.data.local.entity.*
 abstract class FolioDatabase : RoomDatabase() {
 
     abstract fun bookDao(): BookDao
-    abstract fun shelfDao(): ShelfDao
     abstract fun readingSessionDao(): ReadingSessionDao
     abstract fun noteDao(): NoteDao
-    abstract fun goalDao(): GoalDao
     abstract fun userPreferencesDao(): UserPreferencesDao
 
     companion object {

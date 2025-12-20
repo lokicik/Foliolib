@@ -105,16 +105,6 @@ dependencies {
     // WorkManager - Background tasks
     implementation(libs.work.runtime.ktx)
 
-    // CameraX - ISBN Scanner
-    implementation(libs.camera.core)
-    implementation(libs.camera.camera2)
-    implementation(libs.camera.lifecycle)
-    implementation(libs.camera.view)
-
-    // Barcode Scanning
-    implementation(libs.zxing.core)
-    implementation(libs.mlkit.barcode)
-
     // Accompanist - Compose utilities
     implementation(libs.accompanist.permissions)
     implementation(libs.accompanist.systemuicontroller)

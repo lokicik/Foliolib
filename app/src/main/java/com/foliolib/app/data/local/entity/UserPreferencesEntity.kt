@@ -10,7 +10,6 @@ data class UserPreferencesEntity(
     @ColumnInfo(name = "theme_mode") val themeMode: String = "SYSTEM", // LIGHT, DARK, SYSTEM
     @ColumnInfo(name = "reading_reminder_enabled") val readingReminderEnabled: Boolean = false,
     @ColumnInfo(name = "reading_reminder_time") val readingReminderTime: String? = null, // HH:MM format
-    @ColumnInfo(name = "default_shelf_id") val defaultShelfId: String? = null,
     @ColumnInfo(name = "onboarding_completed") val onboardingCompleted: Boolean = false,
     @ColumnInfo(name = "current_streak") val currentStreak: Int = 0,
     @ColumnInfo(name = "longest_streak") val longestStreak: Int = 0,

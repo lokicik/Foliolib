@@ -35,7 +35,6 @@ val DarkSurfaceVariant = Color(0xFF2F2740)
 // Book Material Colors (for rich tactile UI)
 val LeatherBrown = Color(0xFF8B4513)
 val PaperCream = Color(0xFFFFFDD0)
-val BookshelfWood = Color(0xFFDEB887)
 val GoldAccent = Color(0xFFFFD700)
 
 // Status Colors

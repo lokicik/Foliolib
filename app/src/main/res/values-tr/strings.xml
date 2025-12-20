@@ -163,26 +163,6 @@
     <string name="notes_chapter_label">Bölüm</string>
     <string name="notes_content_label">Not *</string>
 
-    <!-- Shelves -->
-    <string name="shelves_title">Raflar</string>
-    <string name="shelves_name_label">Raf Adı</string>
-    <string name="shelves_description_label">Açıklama (İsteğe Bağlı)</string>
-    <string name="shelves_select_color">Renk Seçin</string>
-    <string name="shelves_delete_shelf">Rafı sil</string>
-    <string name="shelves_delete_title">Rafı Sil?</string>
-    <string name="shelves_delete_message">Bu raftaki kitaplar silinmeyecek, sadece raftan kaldırılacak.</string>
-    <string name="shelves_default">Varsayılan Raflar</string>
-    <string name="shelves_custom">Raflarım</string>
-    <string name="shelves_create">Raf Oluştur</string>
-    <string name="shelves_delete">Rafı Sil</string>
-    <string name="shelves_delete_confirm">Bu raf silinsin mi? Kitaplar silinmeyecek.</string>
-    <string name="shelves_book_count">%d kitap</string>
-    <string name="shelves_book_count_singular">1 kitap</string>
-    <string name="shelves_this_shelf">bu raf</string>
-    <string name="shelves_empty_in_name">%s içinde kitap yok</string>
-    <string name="shelves_empty_hint_detail">Kitap detay sayfasından kitap ekleyin</string>
-    <string name="shelves_color_label">Renk</string>
-
     <!-- Statistics -->
     <string name="stats_title">İstatistikler</string>
     <string name="stats_books_read">Okunan Kitaplar</string>
