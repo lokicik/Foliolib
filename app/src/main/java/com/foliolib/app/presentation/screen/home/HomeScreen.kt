@@ -93,7 +93,9 @@ private fun ReadingStreakCard(streak: Int) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
                 Text(
                     text = stringResource(R.string.home_reading_streak),
                     style = MaterialTheme.typography.titleMedium,

@@ -13,7 +13,7 @@ import com.foliolib.app.data.local.entity.*
         NoteEntity::class,
         UserPreferencesEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(Converters::class)

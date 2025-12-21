@@ -84,10 +84,7 @@ fun SettingsScreen(
         }
     }
 
-    // Initialize default shelves on first launch
-    LaunchedEffect(Unit) {
-        viewModel.initializeDefaultShelves()
-    }
+    
 
     if (showPermissionRationale) {
         AlertDialog(
