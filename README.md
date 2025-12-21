@@ -98,8 +98,6 @@ com.foliolib.app/
 │   │   ├── DatabaseModule
 │   │   ├── NetworkModule
 │   │   └── RepositoryModule
-│   └── util/            # Utility classes
-│       └── HapticFeedbackUtil
 ├── data/
 │   ├── local/
 │   │   ├── dao/         # Room Data Access Objects
@@ -152,12 +150,8 @@ Data flow follows the unidirectional data flow pattern:
 
 ### API Keys
 
-The application requires API keys for external book metadata services. These should be added to your `local.properties` file:
+The application requires doesn't require API keys for external book metadata services, used API's are public.
 
-```properties
-GOOGLE_BOOKS_API_KEY=your_google_books_api_key
-ISBNDB_API_KEY=your_isbndb_api_key
-```
 
 ### Build Configuration
 
